@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 配置注解-->
+    <mvc:annotation-driven/>
+    <!--配置静态资源解析器  访问/resource  从本地/resource 开始加载-->
+    <!--<mvc:default-servlet-handler/>-->
+    <mvc:resources mapping="/resource/**" location="/resource/"/>
+
+    <!-- 注册权限拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有请求-->
+            <mvc:mapping path="/**"/>
+            <!-- 静态资源不拦截-->
+            <mvc:exclude-mapping path="/resource/**"/>
+            <!-- 登录认证不拦截-->
+            <mvc:exclude-mapping path="/auth/**"/>
+            <!-- 静态页面不拦截-->
+            <mvc:exclude-mapping path="/topage/**"/>
+            <!-- 上传静态页面不拦截-->
+            <mvc:exclude-mapping path="/uploadpage/**"/>
+            <bean class="com.jlju.docmanager.interceptor.AuthInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!-- 配置mvc-->
+
+    <!--配置包扫描 -->
+    <context:component-scan base-package="com.jlju.docmanager.controller"/>
+
+
+    <!-- 配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+
+    <!-- 文件上传解析器 -->
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="100000000000" />
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    <!-- 属性配置器-->
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean>
+
+
+</beans>

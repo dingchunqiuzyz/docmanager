@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlju.docmanager.dao.MagazineMapper" >
+  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Magazine" >
+    <id column="mag_uuid" property="magUuid" jdbcType="VARCHAR" />
+    <result column="mag_name" property="magName" jdbcType="VARCHAR" />
+    <result column="mag_level" property="magLevel" jdbcType="VARCHAR" />
+    <result column="mag_pub_date" property="magPubDate" jdbcType="DATE" />
+    <result column="mag_teacher_order" property="magTeacherOrder" jdbcType="INTEGER" />
+    <result column="mag_school_order" property="magSchoolOrder" jdbcType="INTEGER" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+    <result column="mag_deac" property="magDeac" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mag_uuid, mag_name, mag_level, mag_pub_date, mag_teacher_order, mag_school_order,
+    fk_teacher_code, mag_deac
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.MagazineExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from magazine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from magazine
+    where mag_uuid = #{magUuid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from magazine
+    where mag_uuid = #{magUuid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.MagazineExample" >
+    delete from magazine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jlju.docmanager.bean.Magazine" >
+    insert into magazine (mag_uuid, mag_name, mag_level,
+    mag_pub_date, mag_teacher_order, mag_school_order,
+    fk_teacher_code, mag_deac)
+    values (#{magUuid,jdbcType=VARCHAR}, #{magName,jdbcType=VARCHAR}, #{magLevel,jdbcType=VARCHAR},
+    #{magPubDate,jdbcType=DATE}, #{magTeacherOrder,jdbcType=INTEGER}, #{magSchoolOrder,jdbcType=INTEGER},
+    #{fkTeacherCode,jdbcType=BIGINT}, #{magDeac,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Magazine" >
+    insert into magazine
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="magUuid != null" >
+        mag_uuid,
+      </if>
+      <if test="magName != null" >
+        mag_name,
+      </if>
+      <if test="magLevel != null" >
+        mag_level,
+      </if>
+      <if test="magPubDate != null" >
+        mag_pub_date,
+      </if>
+      <if test="magTeacherOrder != null" >
+        mag_teacher_order,
+      </if>
+      <if test="magSchoolOrder != null" >
+        mag_school_order,
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code,
+      </if>
+      <if test="magDeac != null" >
+        mag_deac,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="magUuid != null" >
+        #{magUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="magName != null" >
+        #{magName,jdbcType=VARCHAR},
+      </if>
+      <if test="magLevel != null" >
+        #{magLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="magPubDate != null" >
+        #{magPubDate,jdbcType=DATE},
+      </if>
+      <if test="magTeacherOrder != null" >
+        #{magTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="magSchoolOrder != null" >
+        #{magSchoolOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fkTeacherCode != null" >
+        #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+      <if test="magDeac != null" >
+        #{magDeac,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jlju.docmanager.bean.MagazineExample" resultType="java.lang.Integer" >
+    select count(*) from magazine
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update magazine
+    <set >
+      <if test="record.magUuid != null" >
+        mag_uuid = #{record.magUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.magName != null" >
+        mag_name = #{record.magName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.magLevel != null" >
+        mag_level = #{record.magLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.magPubDate != null" >
+        mag_pub_date = #{record.magPubDate,jdbcType=DATE},
+      </if>
+      <if test="record.magTeacherOrder != null" >
+        mag_teacher_order = #{record.magTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.magSchoolOrder != null" >
+        mag_school_order = #{record.magSchoolOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.fkTeacherCode != null" >
+        fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+      </if>
+      <if test="record.magDeac != null" >
+        mag_deac = #{record.magDeac,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update magazine
+    set mag_uuid = #{record.magUuid,jdbcType=VARCHAR},
+    mag_name = #{record.magName,jdbcType=VARCHAR},
+    mag_level = #{record.magLevel,jdbcType=VARCHAR},
+    mag_pub_date = #{record.magPubDate,jdbcType=DATE},
+    mag_teacher_order = #{record.magTeacherOrder,jdbcType=INTEGER},
+    mag_school_order = #{record.magSchoolOrder,jdbcType=INTEGER},
+    fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+    mag_deac = #{record.magDeac,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Magazine" >
+    update magazine
+    <set >
+      <if test="magName != null" >
+        mag_name = #{magName,jdbcType=VARCHAR},
+      </if>
+      <if test="magLevel != null" >
+        mag_level = #{magLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="magPubDate != null" >
+        mag_pub_date = #{magPubDate,jdbcType=DATE},
+      </if>
+      <if test="magTeacherOrder != null" >
+        mag_teacher_order = #{magTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="magSchoolOrder != null" >
+        mag_school_order = #{magSchoolOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+      <if test="magDeac != null" >
+        mag_deac = #{magDeac,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mag_uuid = #{magUuid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Magazine" >
+    update magazine
+    set mag_name = #{magName,jdbcType=VARCHAR},
+      mag_level = #{magLevel,jdbcType=VARCHAR},
+      mag_pub_date = #{magPubDate,jdbcType=DATE},
+      mag_teacher_order = #{magTeacherOrder,jdbcType=INTEGER},
+      mag_school_order = #{magSchoolOrder,jdbcType=INTEGER},
+      fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+      mag_deac = #{magDeac,jdbcType=VARCHAR}
+    where mag_uuid = #{magUuid,jdbcType=VARCHAR}
+  </update>
+
+
+
+  <!-- 自定义查询-->
+  <resultMap id="magazineWithTeacher" type="com.jlju.docmanager.bean.Magazine">
+    <id column="mag_uuid" property="magUuid" jdbcType="VARCHAR" />
+    <result column="mag_name" property="magName" jdbcType="VARCHAR" />
+    <result column="mag_level" property="magLevel" jdbcType="VARCHAR" />
+    <result column="mag_pub_date" property="magPubDate" jdbcType="DATE" />
+    <result column="mag_teacher_order" property="magTeacherOrder" jdbcType="INTEGER" />
+    <result column="mag_school_order" property="magSchoolOrder" jdbcType="INTEGER" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+    <result column="mag_deac" property="magDeac" jdbcType="VARCHAR" />
+    <association property="teachers" javaType="Teachers">
+      <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_code" property="teacherCode" jdbcType="BIGINT" />
+      <result column="college" property="college" jdbcType="VARCHAR" />
+      <result column="major" property="major" jdbcType="VARCHAR" />
+    </association>
+
+  </resultMap>
+
+  <select id="selectMagazineWithTheacher"  resultMap="magazineWithTeacher">
+    select *
+    from magazine m,teachers t
+    where m.fk_teacher_code = t.teacher_code
+    <if test="magName != null and magName != '' " >
+      and  m.mag_name like #{magName}
+    </if>
+    <if test="teacherName != null and teacherName !='' " >
+      and  t.teacher_name like #{teacherName}
+    </if>
+
+  </select>
+</mapper>

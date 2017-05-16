@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlju.docmanager.dao.ReportMapper" >
+  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Report" >
+    <id column="rep_uuid" property="repUuid" jdbcType="CHAR" />
+    <result column="rep_name" property="repName" jdbcType="VARCHAR" />
+    <result column="rep_rank" property="repRank" jdbcType="VARCHAR" />
+    <result column="rep_date" property="repDate" jdbcType="DATE" />
+    <result column="rep_teacher_order" property="repTeacherOrder" jdbcType="INTEGER" />
+    <result column="rep_org" property="repOrg" jdbcType="VARCHAR" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rep_uuid, rep_name, rep_rank, rep_date, rep_teacher_order, rep_org, fk_teacher_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.ReportExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where rep_uuid = #{repUuid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from report
+    where rep_uuid = #{repUuid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.ReportExample" >
+    delete from report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jlju.docmanager.bean.Report" >
+    insert into report (rep_uuid, rep_name, rep_rank, 
+      rep_date, rep_teacher_order, rep_org, 
+      fk_teacher_code)
+    values (#{repUuid,jdbcType=CHAR}, #{repName,jdbcType=VARCHAR}, #{repRank,jdbcType=VARCHAR}, 
+      #{repDate,jdbcType=DATE}, #{repTeacherOrder,jdbcType=INTEGER}, #{repOrg,jdbcType=VARCHAR}, 
+      #{fkTeacherCode,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Report" >
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="repUuid != null" >
+        rep_uuid,
+      </if>
+      <if test="repName != null" >
+        rep_name,
+      </if>
+      <if test="repRank != null" >
+        rep_rank,
+      </if>
+      <if test="repDate != null" >
+        rep_date,
+      </if>
+      <if test="repTeacherOrder != null" >
+        rep_teacher_order,
+      </if>
+      <if test="repOrg != null" >
+        rep_org,
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="repUuid != null" >
+        #{repUuid,jdbcType=CHAR},
+      </if>
+      <if test="repName != null" >
+        #{repName,jdbcType=VARCHAR},
+      </if>
+      <if test="repRank != null" >
+        #{repRank,jdbcType=VARCHAR},
+      </if>
+      <if test="repDate != null" >
+        #{repDate,jdbcType=DATE},
+      </if>
+      <if test="repTeacherOrder != null" >
+        #{repTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="repOrg != null" >
+        #{repOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="fkTeacherCode != null" >
+        #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jlju.docmanager.bean.ReportExample" resultType="java.lang.Integer" >
+    select count(*) from report
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update report
+    <set >
+      <if test="record.repUuid != null" >
+        rep_uuid = #{record.repUuid,jdbcType=CHAR},
+      </if>
+      <if test="record.repName != null" >
+        rep_name = #{record.repName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repRank != null" >
+        rep_rank = #{record.repRank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repDate != null" >
+        rep_date = #{record.repDate,jdbcType=DATE},
+      </if>
+      <if test="record.repTeacherOrder != null" >
+        rep_teacher_order = #{record.repTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.repOrg != null" >
+        rep_org = #{record.repOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fkTeacherCode != null" >
+        fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update report
+    set rep_uuid = #{record.repUuid,jdbcType=CHAR},
+      rep_name = #{record.repName,jdbcType=VARCHAR},
+      rep_rank = #{record.repRank,jdbcType=VARCHAR},
+      rep_date = #{record.repDate,jdbcType=DATE},
+      rep_teacher_order = #{record.repTeacherOrder,jdbcType=INTEGER},
+      rep_org = #{record.repOrg,jdbcType=VARCHAR},
+      fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Report" >
+    update report
+    <set >
+      <if test="repName != null" >
+        rep_name = #{repName,jdbcType=VARCHAR},
+      </if>
+      <if test="repRank != null" >
+        rep_rank = #{repRank,jdbcType=VARCHAR},
+      </if>
+      <if test="repDate != null" >
+        rep_date = #{repDate,jdbcType=DATE},
+      </if>
+      <if test="repTeacherOrder != null" >
+        rep_teacher_order = #{repTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="repOrg != null" >
+        rep_org = #{repOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    where rep_uuid = #{repUuid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Report" >
+    update report
+    set rep_name = #{repName,jdbcType=VARCHAR},
+      rep_rank = #{repRank,jdbcType=VARCHAR},
+      rep_date = #{repDate,jdbcType=DATE},
+      rep_teacher_order = #{repTeacherOrder,jdbcType=INTEGER},
+      rep_org = #{repOrg,jdbcType=VARCHAR},
+      fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT}
+    where rep_uuid = #{repUuid,jdbcType=CHAR}
+  </update>
+
+
+
+  <resultMap id="ReportWithTeachers" type="Report">
+    <id column="rep_uuid" property="repUuid" jdbcType="CHAR" />
+    <result column="rep_name" property="repName" jdbcType="VARCHAR" />
+    <result column="rep_rank" property="repRank" jdbcType="VARCHAR" />
+    <result column="rep_date" property="repDate" jdbcType="DATE" />
+    <result column="rep_teacher_order" property="repTeacherOrder" jdbcType="INTEGER" />
+    <result column="rep_org" property="repOrg" jdbcType="VARCHAR" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+    <association property="teachers" javaType="Teachers">
+      <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_code" property="teacherCode" jdbcType="BIGINT" />
+      <result column="college" property="college" jdbcType="VARCHAR" />
+      <result column="major" property="major" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="selectReportWithTeachers" resultMap="ReportWithTeachers">
+    select * from report r,teachers t
+    where r.fk_teacher_code = t.teacher_code
+    <if test="repName != null and repName != '' " >
+      and  r.rep_name like #{repName}
+    </if>
+    <if test="teacherName != null and teacherName !='' " >
+      and  t.teacher_name like #{teacherName}
+    </if>
+
+  </select>
+
+
+</mapper>

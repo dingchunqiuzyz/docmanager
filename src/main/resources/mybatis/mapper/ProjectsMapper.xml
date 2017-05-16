@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlju.docmanager.dao.ProjectsMapper" >
+  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Projects" >
+    <id column="pro_uuid" property="proUuid" jdbcType="CHAR" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_level" property="proLevel" jdbcType="VARCHAR" />
+    <result column="pro_start_date" property="proStartDate" jdbcType="DATE" />
+    <result column="pro_end_date" property="proEndDate" jdbcType="DATE" />
+    <result column="pro_source" property="proSource" jdbcType="VARCHAR" />
+    <result column="pro_funds" property="proFunds" jdbcType="REAL" />
+    <result column="pro_teacher_order" property="proTeacherOrder" jdbcType="INTEGER" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pro_uuid, pro_name, pro_level, pro_start_date, pro_end_date, pro_source, pro_funds, 
+    pro_teacher_order, fk_teacher_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.ProjectsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from projects
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from projects
+    where pro_uuid = #{proUuid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from projects
+    where pro_uuid = #{proUuid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.ProjectsExample" >
+    delete from projects
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jlju.docmanager.bean.Projects" >
+    insert into projects (pro_uuid, pro_name, pro_level, 
+      pro_start_date, pro_end_date, pro_source, 
+      pro_funds, pro_teacher_order, fk_teacher_code
+      )
+    values (#{proUuid,jdbcType=CHAR}, #{proName,jdbcType=VARCHAR}, #{proLevel,jdbcType=VARCHAR}, 
+      #{proStartDate,jdbcType=DATE}, #{proEndDate,jdbcType=DATE}, #{proSource,jdbcType=VARCHAR}, 
+      #{proFunds,jdbcType=REAL}, #{proTeacherOrder,jdbcType=INTEGER}, #{fkTeacherCode,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Projects" >
+    insert into projects
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proUuid != null" >
+        pro_uuid,
+      </if>
+      <if test="proName != null" >
+        pro_name,
+      </if>
+      <if test="proLevel != null" >
+        pro_level,
+      </if>
+      <if test="proStartDate != null" >
+        pro_start_date,
+      </if>
+      <if test="proEndDate != null" >
+        pro_end_date,
+      </if>
+      <if test="proSource != null" >
+        pro_source,
+      </if>
+      <if test="proFunds != null" >
+        pro_funds,
+      </if>
+      <if test="proTeacherOrder != null" >
+        pro_teacher_order,
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proUuid != null" >
+        #{proUuid,jdbcType=CHAR},
+      </if>
+      <if test="proName != null" >
+        #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proLevel != null" >
+        #{proLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="proStartDate != null" >
+        #{proStartDate,jdbcType=DATE},
+      </if>
+      <if test="proEndDate != null" >
+        #{proEndDate,jdbcType=DATE},
+      </if>
+      <if test="proSource != null" >
+        #{proSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proFunds != null" >
+        #{proFunds,jdbcType=REAL},
+      </if>
+      <if test="proTeacherOrder != null" >
+        #{proTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fkTeacherCode != null" >
+        #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jlju.docmanager.bean.ProjectsExample" resultType="java.lang.Integer" >
+    select count(*) from projects
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update projects
+    <set >
+      <if test="record.proUuid != null" >
+        pro_uuid = #{record.proUuid,jdbcType=CHAR},
+      </if>
+      <if test="record.proName != null" >
+        pro_name = #{record.proName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proLevel != null" >
+        pro_level = #{record.proLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proStartDate != null" >
+        pro_start_date = #{record.proStartDate,jdbcType=DATE},
+      </if>
+      <if test="record.proEndDate != null" >
+        pro_end_date = #{record.proEndDate,jdbcType=DATE},
+      </if>
+      <if test="record.proSource != null" >
+        pro_source = #{record.proSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proFunds != null" >
+        pro_funds = #{record.proFunds,jdbcType=REAL},
+      </if>
+      <if test="record.proTeacherOrder != null" >
+        pro_teacher_order = #{record.proTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.fkTeacherCode != null" >
+        fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update projects
+    set pro_uuid = #{record.proUuid,jdbcType=CHAR},
+      pro_name = #{record.proName,jdbcType=VARCHAR},
+      pro_level = #{record.proLevel,jdbcType=VARCHAR},
+      pro_start_date = #{record.proStartDate,jdbcType=DATE},
+      pro_end_date = #{record.proEndDate,jdbcType=DATE},
+      pro_source = #{record.proSource,jdbcType=VARCHAR},
+      pro_funds = #{record.proFunds,jdbcType=REAL},
+      pro_teacher_order = #{record.proTeacherOrder,jdbcType=INTEGER},
+      fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Projects" >
+    update projects
+    <set >
+      <if test="proName != null" >
+        pro_name = #{proName,jdbcType=VARCHAR},
+      </if>
+      <if test="proLevel != null" >
+        pro_level = #{proLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="proStartDate != null" >
+        pro_start_date = #{proStartDate,jdbcType=DATE},
+      </if>
+      <if test="proEndDate != null" >
+        pro_end_date = #{proEndDate,jdbcType=DATE},
+      </if>
+      <if test="proSource != null" >
+        pro_source = #{proSource,jdbcType=VARCHAR},
+      </if>
+      <if test="proFunds != null" >
+        pro_funds = #{proFunds,jdbcType=REAL},
+      </if>
+      <if test="proTeacherOrder != null" >
+        pro_teacher_order = #{proTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    where pro_uuid = #{proUuid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Projects" >
+    update projects
+    set pro_name = #{proName,jdbcType=VARCHAR},
+      pro_level = #{proLevel,jdbcType=VARCHAR},
+      pro_start_date = #{proStartDate,jdbcType=DATE},
+      pro_end_date = #{proEndDate,jdbcType=DATE},
+      pro_source = #{proSource,jdbcType=VARCHAR},
+      pro_funds = #{proFunds,jdbcType=REAL},
+      pro_teacher_order = #{proTeacherOrder,jdbcType=INTEGER},
+      fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT}
+    where pro_uuid = #{proUuid,jdbcType=CHAR}
+  </update>
+
+
+
+  <resultMap id="ProjectWithName" type="Projects">
+    <id column="pro_uuid" property="proUuid" jdbcType="CHAR" />
+    <result column="pro_name" property="proName" jdbcType="VARCHAR" />
+    <result column="pro_level" property="proLevel" jdbcType="VARCHAR" />
+    <result column="pro_start_date" property="proStartDate" jdbcType="DATE" />
+    <result column="pro_end_date" property="proEndDate" jdbcType="DATE" />
+    <result column="pro_source" property="proSource" jdbcType="VARCHAR" />
+    <result column="pro_funds" property="proFunds" jdbcType="REAL" />
+    <result column="pro_teacher_order" property="proTeacherOrder" jdbcType="INTEGER" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+    <association property="teachers" javaType="Teachers">
+      <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_code" property="teacherCode" jdbcType="BIGINT" />
+      <result column="college" property="college" jdbcType="VARCHAR" />
+      <result column="major" property="major" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+
+  <select id="selectWithTeachers" resultMap="ProjectWithName" >
+    select * from projects p ,teachers t
+    WHERE p.fk_teacher_code = t.teacher_code
+    <if test="projectName != null and projectName != '' " >
+      and  p.pro_name like #{projectName}
+    </if>
+    <if test="teacherName != null and teacherName !='' " >
+      and  t.teacher_name like #{teacherName}
+    </if>
+  </select>
+</mapper>

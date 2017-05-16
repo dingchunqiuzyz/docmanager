@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlju.docmanager.dao.PatentsMapper" >
+  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Patents" >
+    <id column="pat_uuid" property="patUuid" jdbcType="CHAR" />
+    <result column="pat_name" property="patName" jdbcType="VARCHAR" />
+    <result column="pat_type" property="patType" jdbcType="VARCHAR" />
+    <result column="pat_code" property="patCode" jdbcType="VARCHAR" />
+    <result column="pat_teacher_name" property="patTeacherName" jdbcType="VARCHAR" />
+    <result column="pat_date" property="patDate" jdbcType="DATE" />
+    <result column="pat_teacher_order" property="patTeacherOrder" jdbcType="INTEGER" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pat_uuid, pat_name, pat_type, pat_code, pat_teacher_name, pat_date, pat_teacher_order, 
+    fk_teacher_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.PatentsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patents
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from patents
+    where pat_uuid = #{patUuid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patents
+    where pat_uuid = #{patUuid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.PatentsExample" >
+    delete from patents
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jlju.docmanager.bean.Patents" >
+    insert into patents (pat_uuid, pat_name, pat_type, 
+      pat_code, pat_teacher_name, pat_date, 
+      pat_teacher_order, fk_teacher_code)
+    values (#{patUuid,jdbcType=CHAR}, #{patName,jdbcType=VARCHAR}, #{patType,jdbcType=VARCHAR}, 
+      #{patCode,jdbcType=VARCHAR}, #{patTeacherName,jdbcType=VARCHAR}, #{patDate,jdbcType=DATE}, 
+      #{patTeacherOrder,jdbcType=INTEGER}, #{fkTeacherCode,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Patents" >
+    insert into patents
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patUuid != null" >
+        pat_uuid,
+      </if>
+      <if test="patName != null" >
+        pat_name,
+      </if>
+      <if test="patType != null" >
+        pat_type,
+      </if>
+      <if test="patCode != null" >
+        pat_code,
+      </if>
+      <if test="patTeacherName != null" >
+        pat_teacher_name,
+      </if>
+      <if test="patDate != null" >
+        pat_date,
+      </if>
+      <if test="patTeacherOrder != null" >
+        pat_teacher_order,
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patUuid != null" >
+        #{patUuid,jdbcType=CHAR},
+      </if>
+      <if test="patName != null" >
+        #{patName,jdbcType=VARCHAR},
+      </if>
+      <if test="patType != null" >
+        #{patType,jdbcType=VARCHAR},
+      </if>
+      <if test="patCode != null" >
+        #{patCode,jdbcType=VARCHAR},
+      </if>
+      <if test="patTeacherName != null" >
+        #{patTeacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="patDate != null" >
+        #{patDate,jdbcType=DATE},
+      </if>
+      <if test="patTeacherOrder != null" >
+        #{patTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fkTeacherCode != null" >
+        #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jlju.docmanager.bean.PatentsExample" resultType="java.lang.Integer" >
+    select count(*) from patents
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patents
+    <set >
+      <if test="record.patUuid != null" >
+        pat_uuid = #{record.patUuid,jdbcType=CHAR},
+      </if>
+      <if test="record.patName != null" >
+        pat_name = #{record.patName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patType != null" >
+        pat_type = #{record.patType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patCode != null" >
+        pat_code = #{record.patCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patTeacherName != null" >
+        pat_teacher_name = #{record.patTeacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patDate != null" >
+        pat_date = #{record.patDate,jdbcType=DATE},
+      </if>
+      <if test="record.patTeacherOrder != null" >
+        pat_teacher_order = #{record.patTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.fkTeacherCode != null" >
+        fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patents
+    set pat_uuid = #{record.patUuid,jdbcType=CHAR},
+      pat_name = #{record.patName,jdbcType=VARCHAR},
+      pat_type = #{record.patType,jdbcType=VARCHAR},
+      pat_code = #{record.patCode,jdbcType=VARCHAR},
+      pat_teacher_name = #{record.patTeacherName,jdbcType=VARCHAR},
+      pat_date = #{record.patDate,jdbcType=DATE},
+      pat_teacher_order = #{record.patTeacherOrder,jdbcType=INTEGER},
+      fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Patents" >
+    update patents
+    <set >
+      <if test="patName != null" >
+        pat_name = #{patName,jdbcType=VARCHAR},
+      </if>
+      <if test="patType != null" >
+        pat_type = #{patType,jdbcType=VARCHAR},
+      </if>
+      <if test="patCode != null" >
+        pat_code = #{patCode,jdbcType=VARCHAR},
+      </if>
+      <if test="patTeacherName != null" >
+        pat_teacher_name = #{patTeacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="patDate != null" >
+        pat_date = #{patDate,jdbcType=DATE},
+      </if>
+      <if test="patTeacherOrder != null" >
+        pat_teacher_order = #{patTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    where pat_uuid = #{patUuid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Patents" >
+    update patents
+    set pat_name = #{patName,jdbcType=VARCHAR},
+      pat_type = #{patType,jdbcType=VARCHAR},
+      pat_code = #{patCode,jdbcType=VARCHAR},
+      pat_teacher_name = #{patTeacherName,jdbcType=VARCHAR},
+      pat_date = #{patDate,jdbcType=DATE},
+      pat_teacher_order = #{patTeacherOrder,jdbcType=INTEGER},
+      fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT}
+    where pat_uuid = #{patUuid,jdbcType=CHAR}
+  </update>
+
+
+  <resultMap id="PatentsWithTeachers" type="Patents">
+    <id column="pat_uuid" property="patUuid" jdbcType="CHAR" />
+    <result column="pat_name" property="patName" jdbcType="VARCHAR" />
+    <result column="pat_type" property="patType" jdbcType="VARCHAR" />
+    <result column="pat_code" property="patCode" jdbcType="VARCHAR" />
+    <result column="pat_teacher_name" property="patTeacherName" jdbcType="VARCHAR" />
+    <result column="pat_date" property="patDate" jdbcType="DATE" />
+    <result column="pat_teacher_order" property="patTeacherOrder" jdbcType="INTEGER" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+    <association property="teachers" javaType="Teachers">
+      <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_code" property="teacherCode" jdbcType="BIGINT" />
+      <result column="college" property="college" jdbcType="VARCHAR" />
+      <result column="major" property="major" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="selectPatentsWithTeachers" resultMap="PatentsWithTeachers">
+    select * from patents p,teachers t
+    where p.fk_teacher_code = t.teacher_code
+    <if test="patentName != null and patentName != '' " >
+      and  p.pat_name like #{patentName}
+    </if>
+    <if test="teacherName != null and teacherName !='' " >
+      and  t.teacher_name like #{teacherName}
+    </if>
+
+  </select>
+
+</mapper>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlju.docmanager.dao.WorksMapper" >
+  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Works" >
+    <id column="work_uuid" property="workUuid" jdbcType="CHAR" />
+    <result column="work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="work_publish" property="workPublish" jdbcType="VARCHAR" />
+    <result column="work_isbn" property="workIsbn" jdbcType="VARCHAR" />
+    <result column="work_date" property="workDate" jdbcType="DATE" />
+    <result column="work_char_number" property="workCharNumber" jdbcType="REAL" />
+    <result column="work_teacher_order" property="workTeacherOrder" jdbcType="INTEGER" />
+    <result column="work_type" property="workType" jdbcType="VARCHAR" />
+    <result column="work_product_type" property="workProductType" jdbcType="VARCHAR" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    work_uuid, work_name, work_publish, work_isbn, work_date, work_char_number, work_teacher_order, 
+    work_type, work_product_type, fk_teacher_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.WorksExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from works
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from works
+    where work_uuid = #{workUuid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from works
+    where work_uuid = #{workUuid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.WorksExample" >
+    delete from works
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jlju.docmanager.bean.Works" >
+    insert into works (work_uuid, work_name, work_publish, 
+      work_isbn, work_date, work_char_number, 
+      work_teacher_order, work_type, work_product_type, 
+      fk_teacher_code)
+    values (#{workUuid,jdbcType=CHAR}, #{workName,jdbcType=VARCHAR}, #{workPublish,jdbcType=VARCHAR}, 
+      #{workIsbn,jdbcType=VARCHAR}, #{workDate,jdbcType=DATE}, #{workCharNumber,jdbcType=REAL}, 
+      #{workTeacherOrder,jdbcType=INTEGER}, #{workType,jdbcType=VARCHAR}, #{workProductType,jdbcType=VARCHAR}, 
+      #{fkTeacherCode,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Works" >
+    insert into works
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workUuid != null" >
+        work_uuid,
+      </if>
+      <if test="workName != null" >
+        work_name,
+      </if>
+      <if test="workPublish != null" >
+        work_publish,
+      </if>
+      <if test="workIsbn != null" >
+        work_isbn,
+      </if>
+      <if test="workDate != null" >
+        work_date,
+      </if>
+      <if test="workCharNumber != null" >
+        work_char_number,
+      </if>
+      <if test="workTeacherOrder != null" >
+        work_teacher_order,
+      </if>
+      <if test="workType != null" >
+        work_type,
+      </if>
+      <if test="workProductType != null" >
+        work_product_type,
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workUuid != null" >
+        #{workUuid,jdbcType=CHAR},
+      </if>
+      <if test="workName != null" >
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="workPublish != null" >
+        #{workPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="workIsbn != null" >
+        #{workIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null" >
+        #{workDate,jdbcType=DATE},
+      </if>
+      <if test="workCharNumber != null" >
+        #{workCharNumber,jdbcType=REAL},
+      </if>
+      <if test="workTeacherOrder != null" >
+        #{workTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="workType != null" >
+        #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="workProductType != null" >
+        #{workProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="fkTeacherCode != null" >
+        #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jlju.docmanager.bean.WorksExample" resultType="java.lang.Integer" >
+    select count(*) from works
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update works
+    <set >
+      <if test="record.workUuid != null" >
+        work_uuid = #{record.workUuid,jdbcType=CHAR},
+      </if>
+      <if test="record.workName != null" >
+        work_name = #{record.workName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workPublish != null" >
+        work_publish = #{record.workPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workIsbn != null" >
+        work_isbn = #{record.workIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workDate != null" >
+        work_date = #{record.workDate,jdbcType=DATE},
+      </if>
+      <if test="record.workCharNumber != null" >
+        work_char_number = #{record.workCharNumber,jdbcType=REAL},
+      </if>
+      <if test="record.workTeacherOrder != null" >
+        work_teacher_order = #{record.workTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.workType != null" >
+        work_type = #{record.workType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workProductType != null" >
+        work_product_type = #{record.workProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fkTeacherCode != null" >
+        fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update works
+    set work_uuid = #{record.workUuid,jdbcType=CHAR},
+      work_name = #{record.workName,jdbcType=VARCHAR},
+      work_publish = #{record.workPublish,jdbcType=VARCHAR},
+      work_isbn = #{record.workIsbn,jdbcType=VARCHAR},
+      work_date = #{record.workDate,jdbcType=DATE},
+      work_char_number = #{record.workCharNumber,jdbcType=REAL},
+      work_teacher_order = #{record.workTeacherOrder,jdbcType=INTEGER},
+      work_type = #{record.workType,jdbcType=VARCHAR},
+      work_product_type = #{record.workProductType,jdbcType=VARCHAR},
+      fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Works" >
+    update works
+    <set >
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="workPublish != null" >
+        work_publish = #{workPublish,jdbcType=VARCHAR},
+      </if>
+      <if test="workIsbn != null" >
+        work_isbn = #{workIsbn,jdbcType=VARCHAR},
+      </if>
+      <if test="workDate != null" >
+        work_date = #{workDate,jdbcType=DATE},
+      </if>
+      <if test="workCharNumber != null" >
+        work_char_number = #{workCharNumber,jdbcType=REAL},
+      </if>
+      <if test="workTeacherOrder != null" >
+        work_teacher_order = #{workTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="workType != null" >
+        work_type = #{workType,jdbcType=VARCHAR},
+      </if>
+      <if test="workProductType != null" >
+        work_product_type = #{workProductType,jdbcType=VARCHAR},
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    where work_uuid = #{workUuid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Works" >
+    update works
+    set work_name = #{workName,jdbcType=VARCHAR},
+      work_publish = #{workPublish,jdbcType=VARCHAR},
+      work_isbn = #{workIsbn,jdbcType=VARCHAR},
+      work_date = #{workDate,jdbcType=DATE},
+      work_char_number = #{workCharNumber,jdbcType=REAL},
+      work_teacher_order = #{workTeacherOrder,jdbcType=INTEGER},
+      work_type = #{workType,jdbcType=VARCHAR},
+      work_product_type = #{workProductType,jdbcType=VARCHAR},
+      fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT}
+    where work_uuid = #{workUuid,jdbcType=CHAR}
+  </update>
+
+
+
+  <resultMap id="WorksWithTeachers" type="Works">
+    <id column="work_uuid" property="workUuid" jdbcType="CHAR" />
+    <result column="work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="work_publish" property="workPublish" jdbcType="VARCHAR" />
+    <result column="work_isbn" property="workIsbn" jdbcType="VARCHAR" />
+    <result column="work_date" property="workDate" jdbcType="DATE" />
+    <result column="work_char_number" property="workCharNumber" jdbcType="REAL" />
+    <result column="work_teacher_order" property="workTeacherOrder" jdbcType="INTEGER" />
+    <result column="work_type" property="workType" jdbcType="VARCHAR" />
+    <result column="work_product_type" property="workProductType" jdbcType="VARCHAR" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+    <association property="teachers" javaType="Teachers">
+      <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_code" property="teacherCode" jdbcType="BIGINT" />
+      <result column="college" property="college" jdbcType="VARCHAR" />
+      <result column="major" property="major" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="selectWorksWithTeachers" resultMap="WorksWithTeachers">
+    select * from works w, teachers t
+    where w.fk_teacher_code = t.teacher_code
+    <if test="workName != null and workName != '' " >
+      and  w.work_name like #{workName}
+    </if>
+    <if test="teacherName != null and teacherName !='' " >
+      and  t.teacher_name like #{teacherName}
+    </if>
+
+  </select>
+</mapper>

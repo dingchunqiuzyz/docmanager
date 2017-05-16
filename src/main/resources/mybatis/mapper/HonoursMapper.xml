@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jlju.docmanager.dao.HonoursMapper" >
+  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Honours" >
+    <id column="ho_uuid" property="hoUuid" jdbcType="CHAR" />
+    <result column="ho_name" property="hoName" jdbcType="VARCHAR" />
+    <result column="ho_rank" property="hoRank" jdbcType="VARCHAR" />
+    <result column="ho_start_date" property="hoStartDate" jdbcType="DATE" />
+    <result column="ho_end_date" property="hoEndDate" jdbcType="DATE" />
+    <result column="ho_teacher_order" property="hoTeacherOrder" jdbcType="INTEGER" />
+    <result column="ho_org" property="hoOrg" jdbcType="VARCHAR" />
+    <result column="ho_money" property="hoMoney" jdbcType="REAL" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ho_uuid, ho_name, ho_rank, ho_start_date, ho_end_date, ho_teacher_order, ho_org, 
+    ho_money, fk_teacher_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.HonoursExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from honours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from honours
+    where ho_uuid = #{hoUuid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from honours
+    where ho_uuid = #{hoUuid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.HonoursExample" >
+    delete from honours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jlju.docmanager.bean.Honours" >
+    insert into honours (ho_uuid, ho_name, ho_rank, 
+      ho_start_date, ho_end_date, ho_teacher_order, 
+      ho_org, ho_money, fk_teacher_code
+      )
+    values (#{hoUuid,jdbcType=CHAR}, #{hoName,jdbcType=VARCHAR}, #{hoRank,jdbcType=VARCHAR}, 
+      #{hoStartDate,jdbcType=DATE}, #{hoEndDate,jdbcType=DATE}, #{hoTeacherOrder,jdbcType=INTEGER}, 
+      #{hoOrg,jdbcType=VARCHAR}, #{hoMoney,jdbcType=REAL}, #{fkTeacherCode,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Honours" >
+    insert into honours
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hoUuid != null" >
+        ho_uuid,
+      </if>
+      <if test="hoName != null" >
+        ho_name,
+      </if>
+      <if test="hoRank != null" >
+        ho_rank,
+      </if>
+      <if test="hoStartDate != null" >
+        ho_start_date,
+      </if>
+      <if test="hoEndDate != null" >
+        ho_end_date,
+      </if>
+      <if test="hoTeacherOrder != null" >
+        ho_teacher_order,
+      </if>
+      <if test="hoOrg != null" >
+        ho_org,
+      </if>
+      <if test="hoMoney != null" >
+        ho_money,
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hoUuid != null" >
+        #{hoUuid,jdbcType=CHAR},
+      </if>
+      <if test="hoName != null" >
+        #{hoName,jdbcType=VARCHAR},
+      </if>
+      <if test="hoRank != null" >
+        #{hoRank,jdbcType=VARCHAR},
+      </if>
+      <if test="hoStartDate != null" >
+        #{hoStartDate,jdbcType=DATE},
+      </if>
+      <if test="hoEndDate != null" >
+        #{hoEndDate,jdbcType=DATE},
+      </if>
+      <if test="hoTeacherOrder != null" >
+        #{hoTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="hoOrg != null" >
+        #{hoOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="hoMoney != null" >
+        #{hoMoney,jdbcType=REAL},
+      </if>
+      <if test="fkTeacherCode != null" >
+        #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jlju.docmanager.bean.HonoursExample" resultType="java.lang.Integer" >
+    select count(*) from honours
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update honours
+    <set >
+      <if test="record.hoUuid != null" >
+        ho_uuid = #{record.hoUuid,jdbcType=CHAR},
+      </if>
+      <if test="record.hoName != null" >
+        ho_name = #{record.hoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoRank != null" >
+        ho_rank = #{record.hoRank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoStartDate != null" >
+        ho_start_date = #{record.hoStartDate,jdbcType=DATE},
+      </if>
+      <if test="record.hoEndDate != null" >
+        ho_end_date = #{record.hoEndDate,jdbcType=DATE},
+      </if>
+      <if test="record.hoTeacherOrder != null" >
+        ho_teacher_order = #{record.hoTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.hoOrg != null" >
+        ho_org = #{record.hoOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoMoney != null" >
+        ho_money = #{record.hoMoney,jdbcType=REAL},
+      </if>
+      <if test="record.fkTeacherCode != null" >
+        fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update honours
+    set ho_uuid = #{record.hoUuid,jdbcType=CHAR},
+      ho_name = #{record.hoName,jdbcType=VARCHAR},
+      ho_rank = #{record.hoRank,jdbcType=VARCHAR},
+      ho_start_date = #{record.hoStartDate,jdbcType=DATE},
+      ho_end_date = #{record.hoEndDate,jdbcType=DATE},
+      ho_teacher_order = #{record.hoTeacherOrder,jdbcType=INTEGER},
+      ho_org = #{record.hoOrg,jdbcType=VARCHAR},
+      ho_money = #{record.hoMoney,jdbcType=REAL},
+      fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Honours" >
+    update honours
+    <set >
+      <if test="hoName != null" >
+        ho_name = #{hoName,jdbcType=VARCHAR},
+      </if>
+      <if test="hoRank != null" >
+        ho_rank = #{hoRank,jdbcType=VARCHAR},
+      </if>
+      <if test="hoStartDate != null" >
+        ho_start_date = #{hoStartDate,jdbcType=DATE},
+      </if>
+      <if test="hoEndDate != null" >
+        ho_end_date = #{hoEndDate,jdbcType=DATE},
+      </if>
+      <if test="hoTeacherOrder != null" >
+        ho_teacher_order = #{hoTeacherOrder,jdbcType=INTEGER},
+      </if>
+      <if test="hoOrg != null" >
+        ho_org = #{hoOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="hoMoney != null" >
+        ho_money = #{hoMoney,jdbcType=REAL},
+      </if>
+      <if test="fkTeacherCode != null" >
+        fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ho_uuid = #{hoUuid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Honours" >
+    update honours
+    set ho_name = #{hoName,jdbcType=VARCHAR},
+      ho_rank = #{hoRank,jdbcType=VARCHAR},
+      ho_start_date = #{hoStartDate,jdbcType=DATE},
+      ho_end_date = #{hoEndDate,jdbcType=DATE},
+      ho_teacher_order = #{hoTeacherOrder,jdbcType=INTEGER},
+      ho_org = #{hoOrg,jdbcType=VARCHAR},
+      ho_money = #{hoMoney,jdbcType=REAL},
+      fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT}
+    where ho_uuid = #{hoUuid,jdbcType=CHAR}
+  </update>
+
+
+
+  <resultMap id="HonoursWithTeachers" type="Honours">
+    <id column="ho_uuid" property="hoUuid" jdbcType="CHAR" />
+    <result column="ho_name" property="hoName" jdbcType="VARCHAR" />
+    <result column="ho_rank" property="hoRank" jdbcType="VARCHAR" />
+    <result column="ho_start_date" property="hoStartDate" jdbcType="DATE" />
+    <result column="ho_end_date" property="hoEndDate" jdbcType="DATE" />
+    <result column="ho_teacher_order" property="hoTeacherOrder" jdbcType="INTEGER" />
+    <result column="ho_org" property="hoOrg" jdbcType="VARCHAR" />
+    <result column="ho_money" property="hoMoney" jdbcType="REAL" />
+    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
+    <association property="teachers" javaType="Teachers">
+      <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
+      <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
+      <result column="teacher_code" property="teacherCode" jdbcType="BIGINT" />
+      <result column="college" property="college" jdbcType="VARCHAR" />
+      <result column="major" property="major" jdbcType="VARCHAR" />
+    </association>
+  </resultMap>
+  <select id="selectHonoursWithTeachers" resultMap="HonoursWithTeachers">
+    select * from honours h ,teachers t
+    where h.fk_teacher_code = t.teacher_code
+
+    <if test="honName != null and honName != '' " >
+      and  h.ho_name like #{honName}
+    </if>
+    <if test="teacherName != null and teacherName !='' " >
+      and  t.teacher_name like #{teacherName}
+    </if>
+
+  </select>
+</mapper>
