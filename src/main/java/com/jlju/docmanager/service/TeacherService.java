@@ -2,6 +2,7 @@ package com.jlju.docmanager.service;
 
 import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Teachers;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -59,5 +60,8 @@ public interface TeacherService
       * @return
       */
      String selectTeacherByNameAsJson(String teacherName);
+
+
+     void batchInsert(MultipartFile file) throws Exception;
 
 }

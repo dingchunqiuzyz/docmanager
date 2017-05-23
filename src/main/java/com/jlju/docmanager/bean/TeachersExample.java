@@ -364,73 +364,73 @@ public class TeachersExample {
             return (Criteria) this;
         }
 
-        public Criteria andMajorIsNull() {
-            addCriterion("major is null");
+        public Criteria andPasswordIsNull() {
+            addCriterion("password is null");
             return (Criteria) this;
         }
 
-        public Criteria andMajorIsNotNull() {
-            addCriterion("major is not null");
+        public Criteria andPasswordIsNotNull() {
+            addCriterion("password is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMajorEqualTo(String value) {
-            addCriterion("major =", value, "major");
+        public Criteria andPasswordEqualTo(String value) {
+            addCriterion("password =", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotEqualTo(String value) {
-            addCriterion("major <>", value, "major");
+        public Criteria andPasswordNotEqualTo(String value) {
+            addCriterion("password <>", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorGreaterThan(String value) {
-            addCriterion("major >", value, "major");
+        public Criteria andPasswordGreaterThan(String value) {
+            addCriterion("password >", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorGreaterThanOrEqualTo(String value) {
-            addCriterion("major >=", value, "major");
+        public Criteria andPasswordGreaterThanOrEqualTo(String value) {
+            addCriterion("password >=", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorLessThan(String value) {
-            addCriterion("major <", value, "major");
+        public Criteria andPasswordLessThan(String value) {
+            addCriterion("password <", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorLessThanOrEqualTo(String value) {
-            addCriterion("major <=", value, "major");
+        public Criteria andPasswordLessThanOrEqualTo(String value) {
+            addCriterion("password <=", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorLike(String value) {
-            addCriterion("major like", value, "major");
+        public Criteria andPasswordLike(String value) {
+            addCriterion("password like", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotLike(String value) {
-            addCriterion("major not like", value, "major");
+        public Criteria andPasswordNotLike(String value) {
+            addCriterion("password not like", value, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorIn(List<String> values) {
-            addCriterion("major in", values, "major");
+        public Criteria andPasswordIn(List<String> values) {
+            addCriterion("password in", values, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotIn(List<String> values) {
-            addCriterion("major not in", values, "major");
+        public Criteria andPasswordNotIn(List<String> values) {
+            addCriterion("password not in", values, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorBetween(String value1, String value2) {
-            addCriterion("major between", value1, value2, "major");
+        public Criteria andPasswordBetween(String value1, String value2) {
+            addCriterion("password between", value1, value2, "password");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotBetween(String value1, String value2) {
-            addCriterion("major not between", value1, value2, "major");
+        public Criteria andPasswordNotBetween(String value1, String value2) {
+            addCriterion("password not between", value1, value2, "password");
             return (Criteria) this;
         }
     }

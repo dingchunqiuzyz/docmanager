@@ -30,7 +30,7 @@ var teachers={
                 $("#teacherName").val(data.data['teacherName']);
                 $("#teacherCode").val(data.data['teacherCode']);
                 $("#college").val(data.data['college']);
-                $("#major").val(data.data['major']);
+                $("#password").val(data.data['password']);
                 $("#teacherModel").modal({//显示弹出层
                     backdrop: 'static',//不可后退
                     keyboard: false//进制键盘事件
@@ -47,14 +47,14 @@ var teachers={
        var teacherName=$("#teacherName").val();
        var teacherCode= $("#teacherCode").val();
        var college= $("#college").val();
-       var major= $("#major").val();
+       var password= $("#password").val();
 
         var teacher={
             "teacherId":teacherId,
             "teacherName":teacherName,
             "teacherCode":teacherCode,
             "college":college,
-            "major":major
+            "password":password
         };
         $.post(teachers.URL.editURL(),teacher,function(data){
             if(data&&data.success){

@@ -26,7 +26,6 @@
                     <th>姓名</th>
                     <th>教工号</th>
                     <th>学院</th>
-                    <th>专业</th>
                     <th>操作</th>
                 </tr>
                 </thead>
@@ -37,7 +36,6 @@
                         <td>${t.teacherName}</td>
                         <td>${t.teacherCode}</td>
                         <td>${t.college}</td>
-                        <td>${t.major}</td>
                         <td><a class="btn btn-link glyphicon glyphicon-pencil" href="javascript:;" onclick="teachers.query('${t.teacherId}')">修改</a>|<a
                                 class="btn btn-link glyphicon glyphicon-ban-circle" href="javascript:;" onclick="teachers.delete('${t.teacherId}')">删除</a></td>
                     </tr>
@@ -107,16 +105,15 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label">所在专业:</label>
+                                    <label class="col-sm-3 control-label">密码:</label>
                                     <div class="col-sm-8 ">
-                                        <input type="text" id="major" class="form-control" placeholder="请输入专业" required/>
+                                        <input type="password" id="password" class="form-control" placeholder="请输入密码" required/>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="panel-footer panel-success">
-                            <div class="alert alert-success " style="display:none" role="alert" id="success">查询失败</div>
                             <button class="btn btn-success " type="button" id="editBtn">确定</button>
                             <button class="btn btn-success " type="button" id="closeBtn">关闭</button>
                         </div>

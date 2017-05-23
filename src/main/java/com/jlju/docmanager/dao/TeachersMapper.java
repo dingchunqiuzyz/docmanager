@@ -27,4 +27,6 @@ public interface TeachersMapper {
     int updateByPrimaryKeySelective(Teachers record);
 
     int updateByPrimaryKey(Teachers record);
+
+    void batchInsert(List<Teachers> list);
 }

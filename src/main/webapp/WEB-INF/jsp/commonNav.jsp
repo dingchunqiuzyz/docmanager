@@ -9,7 +9,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/search/list">高校文档管理系统</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/search/list"><img src="${pageContext.request.contextPath}/resource/images/logo.jpg" alt="..." class="img-circle" width="40" height="40"></a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/search/list">学院科研文档管系统</a>
+
     </div>
     <!-- 真正的导航链接-->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -17,7 +19,15 @@
         <li><a href="${pageContext.request.contextPath}/search/list">文件检索</a></li>
         <li><a href="${pageContext.request.contextPath}/topage/hasupload">文件上传</a></li>
         <li><a href="${pageContext.request.contextPath}/users/list">系统用户管理</a></li>
-        <li><a href="${pageContext.request.contextPath}/teachers/list">教师信息管理</a></li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">基础数据管理 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="${pageContext.request.contextPath}/project/manager">科研项目类管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/teachers/list">教师信息管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/teachers/import">教师信息批量导入</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">文件管理 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

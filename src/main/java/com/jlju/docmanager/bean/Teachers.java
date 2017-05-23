@@ -9,7 +9,7 @@ public class Teachers {
 
     private String college;
 
-    private String major;
+    private String password;
 
     public Integer getTeacherId() {
         return teacherId;
@@ -43,11 +43,11 @@ public class Teachers {
         this.college = college == null ? null : college.trim();
     }
 
-    public String getMajor() {
-        return major;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMajor(String major) {
-        this.major = major == null ? null : major.trim();
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
     }
 }

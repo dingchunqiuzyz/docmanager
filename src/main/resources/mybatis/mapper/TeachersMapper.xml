@@ -1,211 +1,224 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jlju.docmanager.dao.TeachersMapper" >
-  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Teachers" >
-    <id column="teacher_id" property="teacherId" jdbcType="INTEGER" />
-    <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
-    <result column="teacher_code" property="teacherCode" jdbcType="BIGINT" />
-    <result column="college" property="college" jdbcType="VARCHAR" />
-    <result column="major" property="major" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.jlju.docmanager.dao.TeachersMapper">
+    <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.Teachers">
+        <id column="teacher_id" property="teacherId" jdbcType="INTEGER"/>
+        <result column="teacher_name" property="teacherName" jdbcType="VARCHAR"/>
+        <result column="teacher_code" property="teacherCode" jdbcType="BIGINT"/>
+        <result column="college" property="college" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
+    <insert id="batchInsert" parameterType="java.util.List">
+        insert ignore into teachers (teacher_id, teacher_name, teacher_code,
+        college, password)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.teacherId,jdbcType=INTEGER}, #{item.teacherName,jdbcType=VARCHAR}, #{item.teacherCode,jdbcType=BIGINT},
+            #{item.college,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    teacher_id, teacher_name, teacher_code, college, password
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.TeachersExample">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    teacher_id, teacher_name, teacher_code, college, major
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.TeachersExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from teachers
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from teachers
-    where teacher_id = #{teacherId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        <include refid="Base_Column_List"/>
+        from teachers
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from teachers
+        where teacher_id = #{teacherId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from teachers
     where teacher_id = #{teacherId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.TeachersExample" >
-    delete from teachers
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jlju.docmanager.bean.Teachers" >
+    <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.TeachersExample">
+        delete from teachers
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.jlju.docmanager.bean.Teachers">
     insert into teachers (teacher_id, teacher_name, teacher_code, 
-      college, major)
+      college, password)
     values (#{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, #{teacherCode,jdbcType=BIGINT}, 
-      #{college,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR})
+      #{college,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Teachers" >
-    insert into teachers
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="teacherId != null" >
-        teacher_id,
-      </if>
-      <if test="teacherName != null" >
-        teacher_name,
-      </if>
-      <if test="teacherCode != null" >
-        teacher_code,
-      </if>
-      <if test="college != null" >
-        college,
-      </if>
-      <if test="major != null" >
-        major,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="teacherId != null" >
-        #{teacherId,jdbcType=INTEGER},
-      </if>
-      <if test="teacherName != null" >
-        #{teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherCode != null" >
-        #{teacherCode,jdbcType=BIGINT},
-      </if>
-      <if test="college != null" >
-        #{college,jdbcType=VARCHAR},
-      </if>
-      <if test="major != null" >
-        #{major,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.jlju.docmanager.bean.TeachersExample" resultType="java.lang.Integer" >
-    select count(*) from teachers
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update teachers
-    <set >
-      <if test="record.teacherId != null" >
-        teacher_id = #{record.teacherId,jdbcType=INTEGER},
-      </if>
-      <if test="record.teacherName != null" >
+    <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.Teachers">
+        insert into teachers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">
+                teacher_id,
+            </if>
+            <if test="teacherName != null">
+                teacher_name,
+            </if>
+            <if test="teacherCode != null">
+                teacher_code,
+            </if>
+            <if test="college != null">
+                college,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">
+                #{teacherId,jdbcType=INTEGER},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherCode != null">
+                #{teacherCode,jdbcType=BIGINT},
+            </if>
+            <if test="college != null">
+                #{college,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.jlju.docmanager.bean.TeachersExample" resultType="java.lang.Integer">
+        select count(*) from teachers
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update teachers
+        <set>
+            <if test="record.teacherId != null">
+                teacher_id = #{record.teacherId,jdbcType=INTEGER},
+            </if>
+            <if test="record.teacherName != null">
+                teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherCode != null">
+                teacher_code = #{record.teacherCode,jdbcType=BIGINT},
+            </if>
+            <if test="record.college != null">
+                college = #{record.college,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null">
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update teachers
+        set teacher_id = #{record.teacherId,jdbcType=INTEGER},
         teacher_name = #{record.teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.teacherCode != null" >
         teacher_code = #{record.teacherCode,jdbcType=BIGINT},
-      </if>
-      <if test="record.college != null" >
         college = #{record.college,jdbcType=VARCHAR},
-      </if>
-      <if test="record.major != null" >
-        major = #{record.major,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update teachers
-    set teacher_id = #{record.teacherId,jdbcType=INTEGER},
-      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
-      teacher_code = #{record.teacherCode,jdbcType=BIGINT},
-      college = #{record.college,jdbcType=VARCHAR},
-      major = #{record.major,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Teachers" >
-    update teachers
-    <set >
-      <if test="teacherName != null" >
-        teacher_name = #{teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherCode != null" >
-        teacher_code = #{teacherCode,jdbcType=BIGINT},
-      </if>
-      <if test="college != null" >
-        college = #{college,jdbcType=VARCHAR},
-      </if>
-      <if test="major != null" >
-        major = #{major,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where teacher_id = #{teacherId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Teachers" >
+        password = #{record.password,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.Teachers">
+        update teachers
+        <set>
+            <if test="teacherName != null">
+                teacher_name = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherCode != null">
+                teacher_code = #{teacherCode,jdbcType=BIGINT},
+            </if>
+            <if test="college != null">
+                college = #{college,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where teacher_id = #{teacherId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.Teachers">
     update teachers
     set teacher_name = #{teacherName,jdbcType=VARCHAR},
       teacher_code = #{teacherCode,jdbcType=BIGINT},
       college = #{college,jdbcType=VARCHAR},
-      major = #{major,jdbcType=VARCHAR}
+      password = #{password,jdbcType=VARCHAR}
     where teacher_id = #{teacherId,jdbcType=INTEGER}
   </update>
+
+
 </mapper>
