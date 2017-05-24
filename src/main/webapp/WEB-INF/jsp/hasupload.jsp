@@ -15,11 +15,21 @@
             <form class="form-inline col-sm-offset-1" id="userForm" action="/search/hasUpload" method="post">
                 <div class="row ">
                     <input type="hidden" id="pageNum" name="pageNum" value="${info.pageNum}"/>
-                    <input class="form-control" type="text" id="teacherName" name="teacherName"
-                           value="${cache.teacherName}" placeholder="教师名称">
-                    <select class="form-control" id="fkTeacherCode" name="fkTeacherCode">
-                        <option value="">请输先入名称</option>
-                    </select>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="teacherName" name="teacherName" value="${cache.teacherName}" placeholder="教师名称">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="">
+                                重新选
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            </ul>
+                        </div>
+                        <!-- /btn-group -->
+                    </div>
+                    <input class="form-control" type="text" placeholder="教工号"  id="fkTeacherCode" name="fkTeacherCode" value="${cache.fkTeacherCode}" readonly="readonly">
+                    <input class="form-control " type="text" name="fileName" value="${cache.fileName}"
+                           placeholder="文件名称">
                     <select class="form-control" name="fileType" id="fileType">
                         <option value="">全部</option>
                         <option value="学术论文">学术论文</option>
@@ -30,24 +40,12 @@
                         <option value="成果转化">成果转化</option>
                         <option value="论证报告">论证报告</option>
                     </select>
-                    <label id="info"></label>
-
-                </div>
-                <div class="row ">
-                    <input class="form-control " type="text" name="fileName" value="${cache.fileName}"
-                           placeholder="文件名称">
-
-                    <input class="form-control " type="text" name="startDate"
-                           onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-                           value="<fmt:formatDate value="${cache.startDate}"  pattern="yyyy-MM-dd"/>"
-                           placeholder="起始时间">
-                    <input class="form-control " type="text" name="endDate"
-                           onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-                           value="<fmt:formatDate value="${cache.endDate}"  pattern="yyyy-MM-dd"/>" placeholder="结束时间">
                     <button class="btn bg-primary  glyphicon glyphicon-zoom-in " id="btnSearch" type="submit" value="">
                         搜索
                     </button>
+
                 </div>
+
 
             </form>
             <table class="table table-hover">
@@ -111,8 +109,8 @@
     <div class="panel panel-primary  text-center ">
 
         <div class="panel-body">
-            <ul class="nav nav-tabs" role="tablist" id="upload">
-                <li role="presentation" class="active"><a href="#home" data-toggle="tab">学术论文类</a></li>
+            <ul id="upload" class="nav nav-tabs" role="tablist" >
+                <li role="presentation" class="active"><a href="#home" id="homeTab" data-toggle="tab">学术论文类</a></li>
                 <li role="presentation"><a href="#yemian" data-toggle="tab" id="project">科研项目类</a></li>
                 <li role="presentation"><a href="#yemian"  data-toggle="tab" id="work">著作书籍</a></li>
                 <li role="presentation"><a href="#yemian" data-toggle="tab" id="patents">专利类</a></li>
@@ -219,29 +217,30 @@
 </body>
 
 <%@include file="/WEB-INF/jsp/commonjs.jsp" %>
-<%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%--本页面用到的js --%>
+<script src="${pageContext.request.contextPath}/resource/js/bootstrap-suggest.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/search.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
 
 <script type="text/javascript" src="/resource/js/webuploader.js"></script>
 <script type="text/javascript" src="/resource/js/engine/upload.js"></script>
+
 <script>
     //重新刷新
     function reflush() {
         $("#btnSearch").trigger("click");
     }
     $(function () {
-        var code = '${cache.fkTeacherCode}';
-        if (code != null && "" != code) {
-            mysearch.init(code);
-        }
+
 
         function getSelectTeacherCode() {
             var fkTeacherCode = $("#fkTeacherCode").val();
             if (fkTeacherCode == null || fkTeacherCode.length < 5) {
-                Alert('请先选中教师编号！否则将不能上传文件');
+                alert('请先选中教师编号！否则将不能上传文件');
+                //$('#upload li:eq(0) a').tab('show');
+                $("#homeTab").trigger('click');
+
                 return null;
             } else {
                 return fkTeacherCode;

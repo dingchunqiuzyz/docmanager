@@ -116,7 +116,8 @@ public class TeacherController {
 
     @RequestMapping(value = "/queryTeacher", produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
-    public SugResult<Teachers> queryTeacher(String teacherName) {List<Teachers> teachersList = teacherService.selectTeacherByName(teacherName);
+    public SugResult<Teachers> queryTeacher(String teacherName) {
+        List<Teachers> teachersList = teacherService.selectTeacherByName(teacherName);
         if (teachersList != null) {
             return new SugResult<Teachers>("查询成功",200,teachersList,"");
         } else {
@@ -141,21 +142,21 @@ public class TeacherController {
             webResult = new WebResult<String>(true, message, "/teachers/list");//导出更高
         } catch (Exception e) {
             message = e.getMessage();
-            webResult = new WebResult<String>(false, message, "/teachers/import");//重新导入
+            webResult = new WebResult<String>(false, message, "/teachers/toPage/import");//重新导入
         }
 
         model.addAttribute("result", webResult);
         return page;
     }
 
-//    /**
-//     * 界面跳转
-//     *
-//     * @return
-//     */
-//    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
-//    public String toPage(@PathVariable("page") String page) {
-//
-//        return "/teachers/" + page;
-//    }
+    /**
+     * 界面跳转
+     *
+     * @return
+     */
+    @RequestMapping(value = "/toPage/{page}", method = RequestMethod.GET)
+    public String toPage(@PathVariable("page") String page) {
+
+        return "/teachers/" + page;
+    }
 }

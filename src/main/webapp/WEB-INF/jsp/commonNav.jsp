@@ -23,9 +23,9 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">基础数据管理 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="${pageContext.request.contextPath}/project/manager">科研项目类管理</a></li>
+            <li><a href="${pageContext.request.contextPath}/college/list">学院信息管理</a></li>
             <li><a href="${pageContext.request.contextPath}/teachers/list">教师信息管理</a></li>
-            <li><a href="${pageContext.request.contextPath}/teachers/import">教师信息批量导入</a></li>
+            <li><a href="${pageContext.request.contextPath}/teachers/toPage/import">教师信息批量导入</a></li>
           </ul>
         </li>
         <li class="dropdown">

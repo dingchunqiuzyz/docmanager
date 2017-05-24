@@ -31,7 +31,7 @@ public class CollegeController {
     public String list(Model model) {
         List<College> colleges = collegeService.query();
         model.addAttribute("colleges", colleges);
-        return "colleges/list";
+        return "/colleges/list";
     }
 
     @RequestMapping(value = "/edit", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)

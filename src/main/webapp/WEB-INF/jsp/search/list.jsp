@@ -14,6 +14,32 @@
             <form class="form-inline col-sm-offset-1" id="userForm" action="/search/list" method="post">
                 <div class="row ">
 
+
+
+
+                    <%--<input class="form-control " type="text" name="startDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="<fmt:formatDate value="${cache.startDate}"  pattern="yyyy-MM-dd"/>" placeholder="起始时间">--%>
+                    <%--<input class="form-control " type="text" name="endDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="<fmt:formatDate value="${cache.endDate}"  pattern="yyyy-MM-dd"/>" placeholder="结束时间">--%>
+                </div>
+
+                <div class="row ">
+                    <input type="hidden" id="pageNum" name="pageNum" value="${info.size==0?'1':info.pageNum}"/>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="teacherName" name="teacherName" value="${cache.teacherName}" placeholder="教师名称">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="">
+                                重新选
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            </ul>
+                        </div>
+                        <!-- /btn-group -->
+                    </div>
+                    <input class="form-control" type="text" placeholder="教工号"  id="fkTeacherCode" name="fkTeacherCode" value="${cache.fkTeacherCode}" readonly="readonly">
+                    <%--<select class="form-control" id="fkTeacherCode" name="fkTeacherCode" >--%>
+                        <%--<option value="">请输先入名称</option>--%>
+                    <%--</select>--%>
+                    <input class="form-control " type="text" name="fileName" value="${cache.fileName}" placeholder="文件名称">
+                    <label id="info"></label>
                     <select class="form-control" name="fileType" id="fileType">
                         <option  value="">全部</option>
                         <option value="学术论文">学术论文</option>
@@ -24,20 +50,6 @@
                         <option value="成果转化">成果转化</option>
                         <option value="论证报告">论证报告</option>
                     </select>
-
-
-                    <input class="form-control " type="text" name="startDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="<fmt:formatDate value="${cache.startDate}"  pattern="yyyy-MM-dd"/>" placeholder="起始时间">
-                    <input class="form-control " type="text" name="endDate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="<fmt:formatDate value="${cache.endDate}"  pattern="yyyy-MM-dd"/>" placeholder="结束时间">
-                </div>
-
-                <div class="row ">
-                    <input type="hidden" id="pageNum" name="pageNum" value="${info.size==0?'1':info.pageNum}"/>
-                    <input class="form-control" type="text" id="teacherName" name="teacherName" value="${cache.teacherName}" placeholder="教师名称">
-                    <select class="form-control" id="fkTeacherCode" name="fkTeacherCode" >
-                        <option value="">请输先入名称</option>
-                    </select>
-                    <input class="form-control " type="text" name="fileName" value="${cache.fileName}" placeholder="文件名称">
-                    <label id="info"></label>
                     <button class="btn bg-primary  glyphicon glyphicon-zoom-in " id="btnSearch" type="submit" >搜索</button>
                     <button class="btn bg-primary glyphicon glyphicon-print " type="button" id="batchDownloadBtn">批量下载</button>
                 </div>
@@ -112,20 +124,18 @@
 </body>
 <%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%@include file="/WEB-INF/jsp/commonjs.jsp"%>
+<script src="${pageContext.request.contextPath}/resource/js/bootstrap-suggest.min.js"></script>
 <%--本页面用到的js --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/search.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
+
 <script>
     $(function(){
 
         //让下拉框选中
         $("#fileType").val('${cache.fileType}');
 
-    var code = '${cache.fkTeacherCode}';
-    if(code!=null&&""!=null){
-        mysearch.init(code);
-    }
+
 
      //全选orNot
 
