@@ -54,6 +54,7 @@
         </div>
     </form>
 </div>
+<%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%@include file="/WEB-INF/jsp/commonjs.jsp" %>
 <%--本页面用到的js --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/teacher.js"></script>

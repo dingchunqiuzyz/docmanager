@@ -2,6 +2,7 @@ package com.jlju.docmanager.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Teachers;
+import com.jlju.docmanager.dto.SugResult;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 /**
  * Created by zyz on 2016/11/9.
@@ -99,14 +102,25 @@ public class TeacherController {
 
     }
 
-    @RequestMapping(value = "/queryTeacher", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
+//    @RequestMapping(value = "/queryTeacher", produces = {"application/json;charset=UTF-8"})
+//    @ResponseBody
+//    public WebResult<String> queryTeacher(String teacherName) {
+//        String result = teacherService.selectTeacherByNameAsJson(teacherName);
+//        if (result == null) {
+//            return new WebResult<String>(false, "查询失败");
+//        } else {
+//            return new WebResult<String>(true, "查询成功", result);
+//        }
+//
+//    }
+
+    @RequestMapping(value = "/queryTeacher", produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
-    public WebResult<String> queryTeacher(String teacherName) {
-        String result = teacherService.selectTeacherByNameAsJson(teacherName);
-        if (result == null) {
-            return new WebResult<String>(false, "查询失败");
+    public SugResult<Teachers> queryTeacher(String teacherName) {List<Teachers> teachersList = teacherService.selectTeacherByName(teacherName);
+        if (teachersList != null) {
+            return new SugResult<Teachers>("查询成功",200,teachersList,"");
         } else {
-            return new WebResult<String>(true, "查询成功", result);
+            return new SugResult<Teachers>("查询失败",500,teachersList,"");
         }
 
     }
@@ -134,14 +148,14 @@ public class TeacherController {
         return page;
     }
 
-    /**
-     * 界面跳转
-     *
-     * @return
-     */
-    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
-    public String toPage(@PathVariable("page") String page) {
-
-        return "/teachers/" + page;
-    }
+//    /**
+//     * 界面跳转
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "/{page}", method = RequestMethod.GET)
+//    public String toPage(@PathVariable("page") String page) {
+//
+//        return "/teachers/" + page;
+//    }
 }

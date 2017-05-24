@@ -31,7 +31,7 @@
 
 </div>
 </body>
-
+<%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%@include file="/WEB-INF/jsp/commonjs.jsp"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/pdfobject.js"></script>
 <script type="text/javascript">

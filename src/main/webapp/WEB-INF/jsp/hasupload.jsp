@@ -219,6 +219,7 @@
 </body>
 
 <%@include file="/WEB-INF/jsp/commonjs.jsp" %>
+<%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%--本页面用到的js --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/search.js"></script>
 

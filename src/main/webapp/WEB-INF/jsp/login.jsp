@@ -45,11 +45,7 @@
 
 </div>
 
-<nav class="navbar navbar-fixed-bottom">
-    <div class="container text-center">
-        学院科研文档管理系统  开发者：张月忠  管理员信息： 联系方式 ： qq：
-    </div>
-</nav>
+<%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%@include file="/WEB-INF/jsp/commonjs.jsp" %>
 
 <script>

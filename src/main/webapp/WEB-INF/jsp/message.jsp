@@ -25,7 +25,7 @@
 </div>
 </body>
 
-
+<%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%@include file="/WEB-INF/jsp/commonjs.jsp"%>
 <script>
     $(function () {
