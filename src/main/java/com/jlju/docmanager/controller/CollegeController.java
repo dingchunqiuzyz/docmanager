@@ -33,10 +33,19 @@ public class CollegeController {
         model.addAttribute("colleges", colleges);
         return "/colleges/list";
     }
+    @RequestMapping(value = "/queryAll", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.GET)
+    @ResponseBody
+    public WebResult<List<College>> queryAll(){
+        List<College> colleges = collegeService.query();
+        if(colleges==null||colleges.isEmpty()){
+            return new WebResult<List<College>>(false,"查询失败");
+        }
+        return new WebResult<List<College>>(true,"查询成功",colleges);
+    }
 
     @RequestMapping(value = "/edit", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
-    public WebResult<Void> editUsers(College college) {
+    public WebResult<Void> edit(College college) {
         int result = -1;
         try {
             //添加

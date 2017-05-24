@@ -92,17 +92,22 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-sm-3 control-label">所在学院:</label>
+                                    <div class="col-sm-8 ">
+                                        <select id="college" class="form-control" placeholder="请选择学院" required>
+
+                                            <option value="">请选择</option>
+                                            <option value="">请选择</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-sm-3 control-label">教工号:</label>
                                     <div class="col-sm-8 ">
                                         <input type="number" id="teacherCode" class="form-control" placeholder="请输入教工号" required/>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">所在学院:</label>
-                                    <div class="col-sm-8 ">
-                                        <input type="text" id="college" class="form-control" placeholder="请输入学院" required/>
-                                    </div>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">密码:</label>

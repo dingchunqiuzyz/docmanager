@@ -11,21 +11,21 @@
     <mvc:resources mapping="/resource/**" location="/resource/"/>
 
     <!-- 注册权限拦截器-->
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; 拦截所有请求&ndash;&gt;-->
-            <!--<mvc:mapping path="/**"/>-->
-            <!--&lt;!&ndash; 静态资源不拦截&ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/resource/**"/>-->
-            <!--&lt;!&ndash; 登录认证不拦截&ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/auth/**"/>-->
-            <!--&lt;!&ndash; 静态页面不拦截&ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/topage/**"/>-->
-            <!--&lt;!&ndash; 上传静态页面不拦截&ndash;&gt;-->
-            <!--<mvc:exclude-mapping path="/uploadpage/**"/>-->
-            <!--<bean class="com.jlju.docmanager.interceptor.AuthInterceptor"></bean>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有请求-->
+            <mvc:mapping path="/**"/>
+            <!-- 静态资源不拦截-->
+            <mvc:exclude-mapping path="/resource/**"/>
+            <!-- 登录认证不拦截-->
+            <mvc:exclude-mapping path="/auth/**"/>
+            <!-- 静态页面不拦截-->
+            <mvc:exclude-mapping path="/topage/**"/>
+            <!-- 上传静态页面不拦截-->
+            <mvc:exclude-mapping path="/uploadpage/**"/>
+            <bean class="com.jlju.docmanager.interceptor.AuthInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
     <!-- 配置mvc-->
 
     <!--配置包扫描 -->
