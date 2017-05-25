@@ -31,7 +31,7 @@ var teachers={
                 // 弹出模态框并且赋值
                 $("#teacherId").val(data.data['teacherId']);
                 $("#teacherName").val(data.data['teacherName']);
-                $("#teacherCode").val(data.data['teacherCode']);
+                $("#teacherCode").attr("readonly","readonly").val(data.data['teacherCode']);
                 $("#college").val(data.data['college']);
                 $("#password").val(data.data['password']);
                 $("#teacherModel").modal({//显示弹出层

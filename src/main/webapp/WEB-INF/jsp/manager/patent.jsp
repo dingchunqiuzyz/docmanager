@@ -63,7 +63,7 @@
 
         <c:if test="${info.size==0}">
           <tr>
-            <td colspan="10" class="text text-center text-danger">没有搜索到结果</td>
+            <td colspan="11" class="text text-center text-danger">没有搜索到结果</td>
 
           </tr>
 

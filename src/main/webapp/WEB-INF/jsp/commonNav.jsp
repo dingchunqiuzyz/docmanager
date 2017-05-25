@@ -84,7 +84,62 @@
           </div>
           <div class="panel-footer panel-success">
             <button class="btn btn-success" type="button" id="loginUpdateBtn">确定</button>
-            <button class="btn btn-success" type="button" id="loginCloseBtn">关闭</button>
+            <button class="btn btn-success" type="button" data-dismiss="modal">关闭</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+<div class="modal fade" id="loginteacherModel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <div class="panel panel-success  text-center wd">
+          <div class="panel-heading"><h3 class="text">教师信息</h3></div>
+          <input type="hidden" id="loginTeacherId" />
+          <div class="panel-body">
+            <form class="form-horizontal" role="form" id="form">
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">教师姓名:</label>
+                <div class="col-sm-8 ">
+                  <input type="text" id="loginTeacherName" class="form-control" placeholder="请输入姓名" required/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">所在学院:</label>
+                <div class="col-sm-8 ">
+                  <select id="loginCollege" class="form-control" placeholder="请选择学院" required>
+
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">教工号:</label>
+                <div class="col-sm-8 ">
+                  <input type="number" id="loginTeacherCode" readonly="readonly" class="form-control" placeholder="请输入教工号" required/>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label class="col-sm-3 control-label">密码:</label>
+                <div class="col-sm-8 ">
+                  <input type="password" id="loginTeacherPassword" class="form-control" placeholder="请输入密码" required/>
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div class="panel-footer panel-success">
+            <button class="btn btn-success " type="button" id="loginTeacherEditBtn">确定</button>
+            <button class="btn btn-success " type="button"  data-dismiss="modal">关闭</button>
           </div>
         </div>
       </div>
@@ -94,16 +149,90 @@
 <script>
   $(function(){
 
+      function updateLoginTeacherInfo() {
+          $.get("/college/queryAll", function(result){
+              //学院下拉框
+              var selectNode=$("#loginCollege");
+              if(result&&result.success) {
+                  //查询成功
+                  var data = result.data;
+                  //为option 添加子节点
+                  //先删除所有子节点
+                  selectNode.empty();
+
+                  selectNode.append("<option value=\"\">请选择...</option>");
+                  $.each(data, function (key, value) {
+
+                      selectNode.append("<option value=" + value.collegeName + ">" + value.collegeName + "</option>");
+                  });
+                  $("#loginCollege").val('${sessionScope.teacher.college}');
+              }
+          });
+
+          $("#loginTeacherId").val('${sessionScope.teacher.teacherId}');
+          $("#loginTeacherName").val('${sessionScope.teacher.teacherName}');
+          $("#loginTeacherCode").val('${sessionScope.teacher.teacherCode}');
+          $("#loginCollege").val('${sessionScope.teacher.college}');
+          $("#loginTeacherPassword").val('${sessionScope.teacher.password}');
+
+          $("#loginteacherModel").modal({
+              backdrop: 'static',//不可后退
+              keyboard: false//进制键盘事件
+          }).show();
+
+
+      }
+
+      $("#loginTeacherEditBtn").click(function () {
+
+
+          var teacherId= $("#loginTeacherId").val();
+          var teacherName=$("#loginTeacherName").val();
+          var teacherCode= $("#loginTeacherCode").val();
+          var college= $("#loginCollege").val();
+          var password= $("#loginTeacherPassword").val();
+
+          var teacher={
+              "teacherId":teacherId,
+              "teacherName":teacherName,
+              "teacherCode":teacherCode,
+              "college":college,
+              "password":password
+          };
+          $.post("/teachers/edit",teacher,function(data){
+              if(data&&data.success){
+                  // 编辑成功：隐藏显示框，刷新界面
+                  Alert({
+                      msg: data.message,
+                      onOk: function(){
+                          window.location.reload();
+                      }
+
+                  });
+
+              }else{//显示错误信息
+                  Alert(data['message']);
+              }
+          });
+      });
+
     $("#updateBtn").click(function(){
-      $("#loginUsername").val('${sessionScope.users.username}');
-      $("#loginPassword").val('${sessionScope.users.password}');
-      $("#loginRealName").val('${sessionScope.users.realName}');
+      ////管理员修改
+        if(${sessionScope.users!=null}){
+            $("#loginUsername").val('${sessionScope.users.username}');
+            $("#loginPassword").val('${sessionScope.users.password}');
+            $("#loginRealName").val('${sessionScope.users.realName}');
 
+            $("#loginUser").modal({
+                backdrop: 'static',//不可后退
+                keyboard: false//进制键盘事件
+            }).show();
+        }
+        ///////教师修改
+        if(${sessionScope.teacher!=null}){
+            updateLoginTeacherInfo();
+        }
 
-      $("#loginUser").modal({
-        backdrop: 'static',//不可后退
-        keyboard: false//进制键盘事件
-      }).show();
     });
 
     $("#loginUpdateBtn").click(function(){
