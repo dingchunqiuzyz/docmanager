@@ -9,8 +9,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/search/list"><img src="${pageContext.request.contextPath}/resource/images/logo.jpg" alt="..." class="img-circle" width="40" height="40"></a>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/search/list">学院科研文档管系统</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/topage/index"><img src="${pageContext.request.contextPath}/resource/images/logo.jpg" alt="..." class="img-circle" width="40" height="40"></a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/topage/index">学院科研文档管系统</a>
 
     </div>
     <!-- 真正的导航链接-->

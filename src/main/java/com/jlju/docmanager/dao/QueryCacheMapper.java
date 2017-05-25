@@ -3,6 +3,8 @@ package com.jlju.docmanager.dao;
 import com.jlju.docmanager.bean.QueryCache;
 import com.jlju.docmanager.bean.QueryCacheExample;
 import java.util.List;
+
+import com.jlju.docmanager.dto.echarts.Data;
 import org.apache.ibatis.annotations.Param;
 
 public interface QueryCacheMapper {
@@ -28,5 +30,15 @@ public interface QueryCacheMapper {
 
     int updateByPrimaryKey(QueryCache record);
 
+    /**
+     * 统计上传文件最多的6个老师
+     * @return
+     */
+    List<Data> countFileTop6();
 
+    /**
+     * 统计各种类型的分布
+     * @return
+     */
+    List<Data> countFileType();
 }

@@ -5,13 +5,32 @@
 <%@include file="/WEB-INF/jsp/commonNav.jsp"%>
 <body>
 
-<h1>欢迎使用文档管理系统！</h1>
+
 <%@include file="/WEB-INF/jsp/commonBottom.jsp"%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/echarts/echarts.common.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/echarts/macarons.js"></script>
 </body>
 
-<%@include file="/WEB-INF/jsp/commonjs.jsp"%>
 
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
+<div class="container text-center">
+    <h1>欢迎使用文档管理系统！<small><a href="https://github.com/zhanyuezhong/docmanager/wiki/%E5%AD%A6%E9%99%A2%E6%96%87%E6%A1%A3%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" target="_blank"> 查看使用说明</a></small></h1>
+
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-6">
+                <div id="bar" style="width: 70%;height:70%;"></div>
+            </div>
+            <div class="col-lg-6">
+                <div id="pie" style="width: 70%;height:70%;"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/echarts/mychart.js"></script>
+
+
 
 </html>

@@ -1,111 +1,113 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jlju.docmanager.dao.QueryCacheMapper" >
-  <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.QueryCache" >
-    <id column="cache_id" property="cacheId" jdbcType="INTEGER" />
-    <result column="file_type" property="fileType" jdbcType="VARCHAR" />
-    <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT" />
-    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
-    <result column="file_path" property="filePath" jdbcType="VARCHAR" />
-    <result column="teacher_name" property="teacherName" jdbcType="VARCHAR" />
-    <result column="project_name" property="projectName" jdbcType="VARCHAR" />
-    <result column="file_date" property="fileDate" jdbcType="DATE" />
-    <result column="orders" property="orders" jdbcType="INTEGER" />
-    <result column="fk_file_uuid" property="fkFileUuid" jdbcType="CHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.jlju.docmanager.dao.QueryCacheMapper">
+    <resultMap id="BaseResultMap" type="com.jlju.docmanager.bean.QueryCache">
+        <id column="cache_id" property="cacheId" jdbcType="INTEGER"/>
+        <result column="file_type" property="fileType" jdbcType="VARCHAR"/>
+        <result column="fk_teacher_code" property="fkTeacherCode" jdbcType="BIGINT"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="teacher_name" property="teacherName" jdbcType="VARCHAR"/>
+        <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
+        <result column="file_date" property="fileDate" jdbcType="DATE"/>
+        <result column="orders" property="orders" jdbcType="INTEGER"/>
+        <result column="fk_file_uuid" property="fkFileUuid" jdbcType="CHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
     cache_id, file_type, fk_teacher_code, file_name, file_path, teacher_name, project_name, 
     file_date, orders, fk_file_uuid
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.QueryCacheExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from query_cache
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from query_cache
-    where cache_id = #{cacheId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jlju.docmanager.bean.QueryCacheExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from query_cache
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from query_cache
+        where cache_id = #{cacheId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from query_cache
     where cache_id = #{cacheId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.QueryCacheExample" >
-    delete from query_cache
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.jlju.docmanager.bean.QueryCache" >
+    <delete id="deleteByExample" parameterType="com.jlju.docmanager.bean.QueryCacheExample">
+        delete from query_cache
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.jlju.docmanager.bean.QueryCache">
     insert into query_cache (cache_id, file_type, fk_teacher_code, 
       file_name, file_path, teacher_name, 
       project_name, file_date, orders, 
@@ -115,167 +117,168 @@
       #{projectName,jdbcType=VARCHAR}, #{fileDate,jdbcType=DATE}, #{orders,jdbcType=INTEGER}, 
       #{fkFileUuid,jdbcType=CHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.QueryCache" >
-    insert into query_cache
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="cacheId != null" >
-        cache_id,
-      </if>
-      <if test="fileType != null" >
-        file_type,
-      </if>
-      <if test="fkTeacherCode != null" >
-        fk_teacher_code,
-      </if>
-      <if test="fileName != null" >
-        file_name,
-      </if>
-      <if test="filePath != null" >
-        file_path,
-      </if>
-      <if test="teacherName != null" >
-        teacher_name,
-      </if>
-      <if test="projectName != null" >
-        project_name,
-      </if>
-      <if test="fileDate != null" >
-        file_date,
-      </if>
-      <if test="orders != null" >
-        orders,
-      </if>
-      <if test="fkFileUuid != null" >
-        fk_file_uuid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="cacheId != null" >
-        #{cacheId,jdbcType=INTEGER},
-      </if>
-      <if test="fileType != null" >
-        #{fileType,jdbcType=VARCHAR},
-      </if>
-      <if test="fkTeacherCode != null" >
-        #{fkTeacherCode,jdbcType=BIGINT},
-      </if>
-      <if test="fileName != null" >
-        #{fileName,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null" >
-        #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherName != null" >
-        #{teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="projectName != null" >
-        #{projectName,jdbcType=VARCHAR},
-      </if>
-      <if test="fileDate != null" >
-        #{fileDate,jdbcType=DATE},
-      </if>
-      <if test="orders != null" >
-        #{orders,jdbcType=INTEGER},
-      </if>
-      <if test="fkFileUuid != null" >
-        #{fkFileUuid,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.jlju.docmanager.bean.QueryCacheExample" resultType="java.lang.Integer" >
-    select count(*) from query_cache
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update query_cache
-    <set >
-      <if test="record.cacheId != null" >
-        cache_id = #{record.cacheId,jdbcType=INTEGER},
-      </if>
-      <if test="record.fileType != null" >
+    <insert id="insertSelective" parameterType="com.jlju.docmanager.bean.QueryCache">
+        insert into query_cache
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cacheId != null">
+                cache_id,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="fkTeacherCode != null">
+                fk_teacher_code,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="filePath != null">
+                file_path,
+            </if>
+            <if test="teacherName != null">
+                teacher_name,
+            </if>
+            <if test="projectName != null">
+                project_name,
+            </if>
+            <if test="fileDate != null">
+                file_date,
+            </if>
+            <if test="orders != null">
+                orders,
+            </if>
+            <if test="fkFileUuid != null">
+                fk_file_uuid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cacheId != null">
+                #{cacheId,jdbcType=INTEGER},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fkTeacherCode != null">
+                #{fkTeacherCode,jdbcType=BIGINT},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectName != null">
+                #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileDate != null">
+                #{fileDate,jdbcType=DATE},
+            </if>
+            <if test="orders != null">
+                #{orders,jdbcType=INTEGER},
+            </if>
+            <if test="fkFileUuid != null">
+                #{fkFileUuid,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.jlju.docmanager.bean.QueryCacheExample"
+            resultType="java.lang.Integer">
+        select count(*) from query_cache
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update query_cache
+        <set>
+            <if test="record.cacheId != null">
+                cache_id = #{record.cacheId,jdbcType=INTEGER},
+            </if>
+            <if test="record.fileType != null">
+                file_type = #{record.fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fkTeacherCode != null">
+                fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
+            </if>
+            <if test="record.fileName != null">
+                file_name = #{record.fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.filePath != null">
+                file_path = #{record.filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.teacherName != null">
+                teacher_name = #{record.teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.projectName != null">
+                project_name = #{record.projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fileDate != null">
+                file_date = #{record.fileDate,jdbcType=DATE},
+            </if>
+            <if test="record.orders != null">
+                orders = #{record.orders,jdbcType=INTEGER},
+            </if>
+            <if test="record.fkFileUuid != null">
+                fk_file_uuid = #{record.fkFileUuid,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update query_cache
+        set cache_id = #{record.cacheId,jdbcType=INTEGER},
         file_type = #{record.fileType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fkTeacherCode != null" >
         fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
-      </if>
-      <if test="record.fileName != null" >
         file_name = #{record.fileName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.filePath != null" >
         file_path = #{record.filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="record.teacherName != null" >
         teacher_name = #{record.teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.projectName != null" >
         project_name = #{record.projectName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fileDate != null" >
         file_date = #{record.fileDate,jdbcType=DATE},
-      </if>
-      <if test="record.orders != null" >
         orders = #{record.orders,jdbcType=INTEGER},
-      </if>
-      <if test="record.fkFileUuid != null" >
-        fk_file_uuid = #{record.fkFileUuid,jdbcType=CHAR},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update query_cache
-    set cache_id = #{record.cacheId,jdbcType=INTEGER},
-      file_type = #{record.fileType,jdbcType=VARCHAR},
-      fk_teacher_code = #{record.fkTeacherCode,jdbcType=BIGINT},
-      file_name = #{record.fileName,jdbcType=VARCHAR},
-      file_path = #{record.filePath,jdbcType=VARCHAR},
-      teacher_name = #{record.teacherName,jdbcType=VARCHAR},
-      project_name = #{record.projectName,jdbcType=VARCHAR},
-      file_date = #{record.fileDate,jdbcType=DATE},
-      orders = #{record.orders,jdbcType=INTEGER},
-      fk_file_uuid = #{record.fkFileUuid,jdbcType=CHAR}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.QueryCache" >
-    update query_cache
-    <set >
-      <if test="fileType != null" >
-        file_type = #{fileType,jdbcType=VARCHAR},
-      </if>
-      <if test="fkTeacherCode != null" >
-        fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
-      </if>
-      <if test="fileName != null" >
-        file_name = #{fileName,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null" >
-        file_path = #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="teacherName != null" >
-        teacher_name = #{teacherName,jdbcType=VARCHAR},
-      </if>
-      <if test="projectName != null" >
-        project_name = #{projectName,jdbcType=VARCHAR},
-      </if>
-      <if test="fileDate != null" >
-        file_date = #{fileDate,jdbcType=DATE},
-      </if>
-      <if test="orders != null" >
-        orders = #{orders,jdbcType=INTEGER},
-      </if>
-      <if test="fkFileUuid != null" >
-        fk_file_uuid = #{fkFileUuid,jdbcType=CHAR},
-      </if>
-    </set>
-    where cache_id = #{cacheId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.QueryCache" >
+        fk_file_uuid = #{record.fkFileUuid,jdbcType=CHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jlju.docmanager.bean.QueryCache">
+        update query_cache
+        <set>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fkTeacherCode != null">
+                fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                file_path = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="teacherName != null">
+                teacher_name = #{teacherName,jdbcType=VARCHAR},
+            </if>
+            <if test="projectName != null">
+                project_name = #{projectName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileDate != null">
+                file_date = #{fileDate,jdbcType=DATE},
+            </if>
+            <if test="orders != null">
+                orders = #{orders,jdbcType=INTEGER},
+            </if>
+            <if test="fkFileUuid != null">
+                fk_file_uuid = #{fkFileUuid,jdbcType=CHAR},
+            </if>
+        </set>
+        where cache_id = #{cacheId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jlju.docmanager.bean.QueryCache">
     update query_cache
     set file_type = #{fileType,jdbcType=VARCHAR},
       fk_teacher_code = #{fkTeacherCode,jdbcType=BIGINT},
@@ -288,4 +291,17 @@
       fk_file_uuid = #{fkFileUuid,jdbcType=CHAR}
     where cache_id = #{cacheId,jdbcType=INTEGER}
   </update>
+
+    <select id="countFileTop6" resultType="com.jlju.docmanager.dto.echarts.Data">
+      SELECT count(*) value, q.teacher_name name from query_cache  q
+        GROUP BY fk_teacher_code
+        ORDER BY value desc
+        limit 6;
+  </select>
+
+    <select id="countFileType" resultType="com.jlju.docmanager.dto.echarts.Data">
+        SELECT count(*) value, q.file_type name from query_cache  q
+        GROUP BY q.file_type
+        ORDER BY value desc
+    </select>
 </mapper>

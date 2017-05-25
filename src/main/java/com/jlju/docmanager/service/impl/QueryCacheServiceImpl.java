@@ -3,9 +3,11 @@ package com.jlju.docmanager.service.impl;
 import com.jlju.docmanager.bean.QueryCache;
 import com.jlju.docmanager.bean.QueryCacheExample;
 import com.jlju.docmanager.dao.QueryCacheMapper;
+import com.jlju.docmanager.dto.echarts.Data;
 import com.jlju.docmanager.service.QueryCacheService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class QueryCacheServiceImpl implements QueryCacheService {
     @Autowired
     private QueryCacheMapper mapper;
+    @Transactional(readOnly = true)
     public QueryCache selectById(Integer cache_id) {
         return mapper.selectByPrimaryKey(cache_id);
     }
@@ -28,5 +31,15 @@ public class QueryCacheServiceImpl implements QueryCacheService {
 
     public List<QueryCache> listFilesWithMagazine(QueryCache cache, Integer pageNum) {
         return null;
+    }
+    @Transactional(readOnly = true)
+    @Override
+    public List<Data> countFileTop6() {
+        return mapper.countFileTop6();
+    }
+    @Transactional(readOnly = true)
+    @Override
+    public List<Data> countFileType() {
+        return mapper.countFileType();
     }
 }

@@ -2,15 +2,23 @@ package com.jlju.docmanager.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.QueryCache;
+import com.jlju.docmanager.dto.WebResult;
+import com.jlju.docmanager.dto.echarts.Bar;
+import com.jlju.docmanager.dto.echarts.Data;
+import com.jlju.docmanager.dto.echarts.Pie;
+import com.jlju.docmanager.dto.echarts.Title;
+import com.jlju.docmanager.service.QueryCacheService;
 import com.jlju.docmanager.service.SearchService;
 import com.jlju.docmanager.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -21,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SearchController {
     @Autowired
     private SearchService service;
+    @Autowired
+    private QueryCacheService queryCacheService;
 
     @Value("#{configProperties['virtualPath']}")
     private String VIRTUAL_PATH;
@@ -55,4 +65,44 @@ public class SearchController {
         return "/search/preview";
     }
 
+
+    @RequestMapping(value = "/count",produces = {"application/json;charset=UTF-8"},method = RequestMethod.GET)
+    @ResponseBody
+    public WebResult<Map<String,Object>> count(){
+
+        try{
+            List<Data> top6Datas = queryCacheService.countFileTop6();
+
+            List<Data> fileTypeDatas = queryCacheService.countFileType();
+
+
+//            /////柱状体
+            Title barTitle = new Title();
+            barTitle.setText("上传文档数量前六名");
+
+            Bar bar = new Bar();
+            bar.setDatas(top6Datas);
+            bar.setTitle(barTitle);
+
+//            ////饼状图
+//
+            Title pieTitle = new Title();
+            pieTitle.setText("上传文档类型分布比例");
+            pieTitle.setSubtext("按面积展示%");
+            pieTitle.setX("center");
+//
+            Pie pie = new Pie();
+            pie.setTitle(pieTitle);
+            pie.setDatas(fileTypeDatas);
+
+            Map<String,Object> map =new HashMap<>();
+            map.put("bar",bar);
+            map.put("pie",pie);
+            return new WebResult<Map<String,Object>>(true,"统计成功!",map);
+
+        }catch (Exception e){
+            return new WebResult<Map<String,Object>>(false,"统计失败！"+e.getMessage());
+        }
+
+    }
 }
