@@ -79,7 +79,7 @@ public class SearchController {
 //            /////柱状体
             Title barTitle = new Title();
             barTitle.setText("上传文档数量前六名");
-
+            barTitle.setX("center");
             Bar bar = new Bar();
             bar.setDatas(top6Datas);
             bar.setTitle(barTitle);

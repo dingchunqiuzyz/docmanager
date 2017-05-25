@@ -10,7 +10,7 @@
   <!-- Bootstrap -->
   <link href="${ pageContext.request.contextPath}/resource/css/bootstrap.min.css" rel="stylesheet">
   <link href="${ pageContext.request.contextPath}/resource/css/custom.css" rel="stylesheet">
-
+  <link rel="SHORTCUT ICON" href="${pageContext.request.contextPath}/resource/images/favicon.ico"/>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <script src="${ pageContext.request.contextPath}/resource/js/jquery.min.js"></script>

@@ -9,7 +9,9 @@ var barOption = {
     },
     tooltip: {},
     legend: {
-        data:['文件个数']
+        data:['文件个数'],
+        orient: 'vertical',
+        left: 'left',
     },
     xAxis: {
         data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
