@@ -11,19 +11,19 @@
         <div class="panel panel-primary  text-center wd">
             <div class="panel-heading"><h5 class="text">教师信息批量导入</h5></div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-lg-3 text-left">
+                <div class="row ">
+                    <div class="col-lg-3 text-left text-danger" >
                         <h6>
-                            <small>批量导入使用说明：</small>
+                            <small class="text-danger">批量导入使用说明：</small>
                         </h6>
                         <h6>
-                            <small>1.下载[教师信息批量导入模板.xlsx]</small>
+                            <small class="text-danger">1.下载[教师信息批量导入模板.xlsx]</small>
                         </h6>
                         <h6>
-                            <small>2.按照格式将教师信息填写到excel中</small>
+                            <small class="text-danger">2.按照格式将教师信息填写到excel中</small>
                         </h6>
                         <h6>
-                            <small>3.将excel上传</small>
+                            <small class="text-danger"class="text-danger">3.将excel上传</small>
                         </h6>
                     </div>
                     <div class="col-lg-9">
