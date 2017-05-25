@@ -49,7 +49,7 @@
             <td>${w.teachers.teacherName}</td>
             <td>${w.workTeacherOrder}</td>
             <td>${w.fkTeacherCode}</td>
-            <td>${w.teachers.college}-${w.teachers.major}</td>
+            <td>${w.teachers.college}</td>
             <td><a class="btn btn-link glyphicon glyphicon-pencil" href="javascript:;" onclick="work.query('${w.workUuid}')">修改</a>|<a
                     class="btn btn-link glyphicon glyphicon-ban-circle" href="javascript:;" onclick="work.delete('${w.workUuid}')">删除</a></td>
           </tr>

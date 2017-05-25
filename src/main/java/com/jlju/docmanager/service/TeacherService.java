@@ -65,6 +65,6 @@ public interface TeacherService
      void batchInsert(MultipartFile file) throws Exception;
 
 
-
+     Teachers getByTeacherCode(Long teacherCode);
 
 }

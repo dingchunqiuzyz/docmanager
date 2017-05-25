@@ -48,7 +48,7 @@
             <td>${m.teachers.teacherName}</td>
 
             <td>${m.fkTeacherCode}</td>
-            <td>${m.teachers.college}-${m.teachers.major}</td>
+            <td>${m.teachers.college}</td>
             <td><a class="btn btn-link glyphicon glyphicon-pencil" href="javascript:;" onclick="magazine.query('${m.magUuid}')">修改</a>|<a
                     class="btn btn-link glyphicon glyphicon-ban-circle" href="javascript:;" onclick="magazine.delete('${m.magUuid}')">删除</a></td>
           </tr>

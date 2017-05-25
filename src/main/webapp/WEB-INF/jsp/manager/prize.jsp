@@ -48,7 +48,7 @@
             <td>${p.priTeacherOrder}</td>
             <td>${p.priSchoolOrder}</td>
             <td>${p.fkTeacherCode}</td>
-            <td>${p.teachers.college}-${p.teachers.major}</td>
+            <td>${p.teachers.college}</td>
             <td><a class="btn btn-link glyphicon glyphicon-pencil" href="javascript:;" onclick="prize.query('${p.priUuid}')">修改</a>|<a
                     class="btn btn-link glyphicon glyphicon-ban-circle" href="javascript:;" onclick="prize.delete('${p.priUuid}')">删除</a></td>
           </tr>

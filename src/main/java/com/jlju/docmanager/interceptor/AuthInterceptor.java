@@ -1,5 +1,6 @@
 package com.jlju.docmanager.interceptor;
 
+import com.jlju.docmanager.bean.Teachers;
 import com.jlju.docmanager.bean.Users;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -13,7 +14,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Users users = (Users) request.getSession().getAttribute("users");
-        if(users ==null){
+        Teachers teachers = (Teachers) request.getSession().getAttribute("teacher");
+        if(users ==null&&teachers==null){
             request.setAttribute("message","您的身份已经过期，请重新登录");
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request,response);
             return  false;

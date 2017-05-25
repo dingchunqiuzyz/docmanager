@@ -128,6 +128,18 @@ public class TeacherServiceImpl implements TeacherService {
 
     }
 
+    @Override
+    public Teachers getByTeacherCode(Long teacherCode) {
+        TeachersExample example = new TeachersExample();
+        TeachersExample.Criteria criteria = example.createCriteria();
+        criteria.andTeacherCodeEqualTo(teacherCode);
+        List<Teachers> teachersList = mapper.selectByExample(example);
+        if(teachersList!=null&&!teachersList.isEmpty()){
+            return  teachersList.get(0);
+        }
+        return null;
+    }
+
     private List<Teachers> parseFromExcel(MultipartFile file) throws Exception{
         List<Teachers> teachersList = new ArrayList<>(200);
         OPCPackage pkg = OPCPackage.open(file.getInputStream());//打开输入流

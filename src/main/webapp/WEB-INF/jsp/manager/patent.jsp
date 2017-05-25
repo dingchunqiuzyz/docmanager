@@ -47,7 +47,7 @@
             <td>${p.patTeacherName}</td>
             <td>${p.patTeacherOrder}</td>
             <td>${p.fkTeacherCode}</td>
-            <td>${p.teachers.college}-${p.teachers.major}</td>
+            <td>${p.teachers.college}</td>
             <td><a class="btn btn-link glyphicon glyphicon-pencil" href="javascript:;" onclick="patent.query('${p.patUuid}')">修改</a>|<a
                     class="btn btn-link glyphicon glyphicon-ban-circle" href="javascript:;" onclick="patent.delete('${p.patUuid}')">删除</a></td>
           </tr>

@@ -49,7 +49,7 @@
             <td>${p.teachers.teacherName}</td>
             <td>${p.proTeacherOrder}</td>
             <td>${p.fkTeacherCode}</td>
-            <td>${p.teachers.college}-${p.teachers.major}</td>
+            <td>${p.teachers.college}</td>
             <td><a class="btn btn-link glyphicon glyphicon-pencil" href="javascript:;" onclick="project.query('${p.proUuid}')">修改</a>|<a
                     class="btn btn-link glyphicon glyphicon-ban-circle" href="javascript:;" onclick="project.delete('${p.proUuid}')">删除</a></td>
           </tr>

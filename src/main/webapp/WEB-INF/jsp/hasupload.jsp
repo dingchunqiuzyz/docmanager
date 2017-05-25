@@ -17,7 +17,7 @@
                     <input type="hidden" id="pageNum" name="pageNum" value="${info.pageNum}"/>
 
                     <div class="input-group">
-                        <input type="text" class="form-control" id="teacherName" name="teacherName" value="${cache.teacherName}" placeholder="教师名称">
+                        <input type="text" class="form-control" id="teacherName" name="teacherName" <c:if test="${sessionScope.teacher!=null}"> readonly="readonly" value="${sessionScope.teacher.teacherName}" </c:if>  <c:if test="${sessionScope.teacher==null}">  value="${cache.teacherName}"</c:if> placeholder="教师姓名">
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="">
                                 重新选
@@ -27,7 +27,7 @@
                         </div>
                         <!-- /btn-group -->
                     </div>
-                    <input class="form-control" type="text" placeholder="教工号"  id="fkTeacherCode" name="fkTeacherCode" value="${cache.fkTeacherCode}" readonly="readonly">
+                    <input class="form-control" type="text" placeholder="教工号"  id="fkTeacherCode" name="fkTeacherCode"  <c:if test="${sessionScope.teacher!=null}"> value="${sessionScope.teacher.teacherCode}" </c:if>  <c:if test="${sessionScope.teacher!=null}">value="${cache.fkTeacherCode}"</c:if>  readonly="readonly">
                     <input class="form-control " type="text" name="fileName" value="${cache.fileName}"
                            placeholder="文件名称">
                     <select class="form-control" name="fileType" id="fileType">
@@ -237,7 +237,7 @@
         function getSelectTeacherCode() {
             var fkTeacherCode = $("#fkTeacherCode").val();
             if (fkTeacherCode == null || fkTeacherCode.length < 5) {
-                alert('请先选中教师编号！否则将不能上传文件');
+                Alert('请先选中教师编号！否则将不能上传文件');
                 //$('#upload li:eq(0) a').tab('show');
                 $("#homeTab").trigger('click');
 

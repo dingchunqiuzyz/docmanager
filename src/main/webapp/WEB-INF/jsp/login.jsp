@@ -27,6 +27,12 @@
                     <strong>密&nbsp;&nbsp;&nbsp;码:</strong>
                     <input type="password" id="loginpassword" placeholder="请输入密码" required>
                 </div>
+                <div class="form-group">
+
+                    <strong>用户类型:</strong>
+                    <input type="radio" name="type" value="admin" placeholder="管理员" checked="checked" required> 管理员
+                    <input type="radio" name="type"  value="teacher" placeholder="教师"  required> 教师
+                </div>
 
                 <div class="form-group">
                     <c:if test="${message!=null}">
@@ -52,10 +58,7 @@
 
     $(function () {
 
-        //登录
-        $("#loginBtn").click(function () {
-
-            //登录
+        function adminLogin() {
             var username = $("#loginusername").val();
             var password = $("#loginpassword").val();
             if (username == "" || password == "") {
@@ -70,12 +73,46 @@
 
                 $.post("/auth/login", user, function (data) {
                     if (data && data.success) {
-                        window.location.href = "${pageContext.request.contextPath}/search/list";
+                        window.location.href = "${pageContext.request.contextPath}/topage/index";
                     } else {
                         Alert(data.message);
                     }
                 });
 
+            }
+        }
+
+        function teacherLogin() {
+            var username = $("#loginusername").val();
+            var password = $("#loginpassword").val();
+            if (username == "" || password == "") {
+                Alert("账号或者密码不能能为空");
+                return;
+            } else {
+
+                var user = {
+                    "username": username,
+                    "password": password
+                };
+
+                $.post("/auth/teacherLogin", user, function (data) {
+                    if (data && data.success) {
+                        window.location.href = "${pageContext.request.contextPath}/topage/index";
+                    } else {
+                        Alert(data.message);
+                    }
+                });
+
+            }
+        }
+        //登录
+        $("#loginBtn").click(function () {
+            var type=$('input:radio[name="type"]:checked').val();
+            if("admin"==type){
+                //admin登录
+               adminLogin();
+            }else if("teacher"==type){
+                teacherLogin();
             }
 
         });

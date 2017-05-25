@@ -18,6 +18,8 @@
       <ul class="nav navbar-nav">
         <li><a href="${pageContext.request.contextPath}/search/list">文件检索</a></li>
         <li><a href="${pageContext.request.contextPath}/topage/hasupload">文件上传</a></li>
+        <!-- 管理员账户才显示-->
+        <c:if test="${sessionScope.users!=null}">
         <li><a href="${pageContext.request.contextPath}/users/list">系统用户管理</a></li>
 
         <li class="dropdown">
@@ -28,6 +30,7 @@
             <li><a href="${pageContext.request.contextPath}/teachers/toPage/import">教师信息批量导入</a></li>
           </ul>
         </li>
+        </c:if>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">文件管理 <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">

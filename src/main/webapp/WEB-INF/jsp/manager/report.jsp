@@ -45,7 +45,7 @@
             <td>${h.teachers.teacherName}</td>
             <td>${h.repTeacherOrder}</td>
             <td>${h.teachers.teacherCode}</td>
-            <td>${h.teachers.college}-${h.teachers.major}</td>
+            <td>${h.teachers.college}</td>
             <td><a class="btn btn-link glyphicon glyphicon-pencil" href="javascript:;" onclick="report.query('${h.repUuid}')">修改</a>|<a
                     class="btn btn-link glyphicon glyphicon-ban-circle" href="javascript:;" onclick="report.delete('${h.repUuid}')">删除</a></td>
           </tr>
