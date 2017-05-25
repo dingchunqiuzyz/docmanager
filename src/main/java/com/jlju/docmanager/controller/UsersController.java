@@ -68,6 +68,10 @@ public class UsersController extends BaseController{
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> update(Users users){
+        WebResult<Void> webResult = ValidateUtils.validate(validator, users);
+        if(webResult!=null){
+            return webResult;
+        }
         int result = -1;
         try {
             result =us.updateUsers(users);
