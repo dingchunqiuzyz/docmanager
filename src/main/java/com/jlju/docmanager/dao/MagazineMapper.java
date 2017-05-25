@@ -28,6 +28,6 @@ public interface MagazineMapper {
 
     int updateByPrimaryKey(Magazine record);
 
-    List<Magazine> selectMagazineWithTheacher(@Param("magName")String magName,@Param("teacherName")String teacherName);
+    List<Magazine> selectMagazineWithTheacher(@Param("magName") String magName, @Param("teacherName") String teacherName, @Param("teacherCode") Long teacherCode);
 
 }

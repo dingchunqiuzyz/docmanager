@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/project")
-public class ProjectController {
+public class ProjectController extends BaseController{
     @Autowired
     private ProjectService ps;
 
@@ -35,11 +35,13 @@ public class ProjectController {
         }
     }
     @RequestMapping("/manager")
-    public String manager(String proName,String teacherName,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
-        PageInfo<Projects> info = ps.projectsWithTeachers(pageNum,proName,teacherName);
+    public String manager(String proName,String teacherName,Long teacherCode,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
+        teacherCode=getLoginTeacherCode()==null?teacherCode:getLoginTeacherCode();
+        PageInfo<Projects> info = ps.projectsWithTeachers(pageNum,proName,teacherName,teacherCode);
         model.addAttribute("info",info);
         model.addAttribute("proName",proName);
         model.addAttribute("teacherName",teacherName);
+        model.addAttribute("teacherCode",teacherCode);
         return "/manager/project";
     }
     @RequestMapping(value = "/{uuid}/delete",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController extends BaseController{
 
     @Autowired
     private UsersSerivce us;
@@ -31,26 +31,25 @@ public class AuthController {
      */
     @RequestMapping(value = "/login", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
-    public WebResult<Void> login(String username, String password, HttpServletRequest request) {
+    public WebResult<Void> login(String username, String password) {
 
         WebResult<Users> result = us.login(username, password);
         if (result.isSuccess() && result.getData() != null) {
             //登录成功
-            HttpSession session = request.getSession();
             session.setAttribute("users", result.getData());
         }
         return new WebResult<Void>(result.isSuccess(), result.getMessage());
     }
 
     @RequestMapping(value = "/logout")
-    public String logout(HttpServletRequest request) {
+    public String logout() {
         request.getSession().invalidate();
         return "redirect:/topage/login";
     }
 
     @RequestMapping(value = "/teacherLogin", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
-    public WebResult<Void> teacherLogin(String username, String password, HttpServletRequest request) {
+    public WebResult<Void> teacherLogin(String username, String password) {
 
         Teachers teachers=null;
         try {

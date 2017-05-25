@@ -9,14 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by zyz on 2016/11/9.
  */
 @Controller
 @RequestMapping("/users")
-public class UsersController {
+public class UsersController extends BaseController{
 
 
     @Autowired
@@ -59,7 +58,7 @@ public class UsersController {
 
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
-    public WebResult<Void> update(Users users,HttpServletRequest request){
+    public WebResult<Void> update(Users users){
         int result = -1;
         try {
             result =us.updateUsers(users);

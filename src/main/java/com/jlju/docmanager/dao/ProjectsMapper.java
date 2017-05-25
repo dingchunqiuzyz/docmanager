@@ -28,7 +28,7 @@ public interface ProjectsMapper {
 
     int updateByPrimaryKey(Projects record);
 
-    List<Projects> selectWithTeachers(@Param("projectName")String projectName,@Param("teacherName")String teacherName);
+    List<Projects> selectWithTeachers(@Param("projectName") String projectName, @Param("teacherName") String teacherName, @Param("teacherCode") Long teacherCode);
 
 
 }

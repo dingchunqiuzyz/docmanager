@@ -78,16 +78,19 @@ public class HonourServiceImpl implements HonourService {
         return result;
     }
 
-    public PageInfo<Honours> selectHonoursWithTeachers(String hoName,String teacherName,Integer pageNum) {
+
+
+    public PageInfo<Honours> selectHonoursWithTeachers(String hoName,String teacherName,Integer pageNum,Long teacherCode) {
         PageHelper.startPage(pageNum, 10);
 
-        if(hoName!=null){
+        if(hoName!=null&&!"".equals(hoName)){
             hoName ="%"+hoName+"%";
         }
         if(teacherName!=null){
             teacherName ="%"+teacherName+"%";
         }
-        List<Honours> honourses = hMapper.selectHonoursWithTeachers(hoName,teacherName);
+
+        List<Honours> honourses = hMapper.selectHonoursWithTeachers(hoName,teacherName,teacherCode);
         return new PageInfo<Honours>(honourses);
     }
 

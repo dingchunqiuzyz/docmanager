@@ -15,7 +15,15 @@
       <form class="form-inline col-sm-offset-1" id="userForm" action="/project/manager" method="post">
         <input type="hidden" id="pageNum" name="pageNum" value="${info.size==0?'1':info.pageNum}"/>
         <input class="form-control" type="text" name="proName" value="${proName}" placeholder="项目名称">
-        <input class="form-control" type="text" name="teacherName" value="${teacherName}" placeholder="教师姓名">
+        <c:if test="${sessionScope.teacher!=null}">
+          <input class="form-control" type="text" name="teacherName" value="${sessionScope.teacher.teacherName}" readonly="readonly" placeholder="教师姓名">
+          <input class="form-control" type="number" name="teacherCode" readonly="readonly" value="${sessionScope.teacher.teacherCode}" placeholder="教工号">
+        </c:if>
+        <c:if test="${sessionScope.teacher==null}">
+          <input class="form-control" type="text" name="teacherName" value="${teacherName}" placeholder="教师姓名">
+          <input class="form-control" type="number" name="teacherCode" value="${teacherCode}" placeholder="教工号">
+        </c:if>
+
         <button class="btn bg-primary glyphicon glyphicon-zoom-in" id="btnSearch" type="submit">搜索</button>
       </form>
 
@@ -57,7 +65,7 @@
 
         <c:if test="${info.size==0}">
           <tr>
-            <td colspan="10" class="text text-center text-danger">没有搜索到结果</td>
+            <td colspan="12" class="text text-center text-danger">没有搜索到结果</td>
 
           </tr>
 

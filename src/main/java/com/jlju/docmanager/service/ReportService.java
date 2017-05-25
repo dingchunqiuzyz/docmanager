@@ -12,7 +12,7 @@ public interface ReportService {
 
      int insert(Report report, String files);
 
-     PageInfo<Report> selectReportWithTeachers(Integer pageNum, String repName, String teacherName);
+     PageInfo<Report> selectReportWithTeachers(Integer pageNum, String repName, String teacherName, Long teacherCode);
 
      int delete(String uuid);
 

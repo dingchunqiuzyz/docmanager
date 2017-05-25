@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/magazine")
-public class MagazineController {
+public class MagazineController extends BaseController{
     @Autowired
     private MagazineService ms;
 
@@ -36,11 +36,14 @@ public class MagazineController {
 
     }
     @RequestMapping("/manager")
-    public String manager(String magName,String teacherName,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
-        PageInfo<Magazine> info = ms.queryMagazine(magName,teacherName, pageNum);
+    public String manager(String magName,String teacherName,Long teacherCode,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
+        //强制替换教工号
+        teacherCode=getLoginTeacherCode()==null?teacherCode:getLoginTeacherCode();
+        PageInfo<Magazine> info = ms.queryMagazine(magName,teacherName,teacherCode, pageNum);
         model.addAttribute("info",info);
         model.addAttribute("magName",magName);
         model.addAttribute("teacherName",teacherName);
+        model.addAttribute("teacherCode",teacherCode);
         return "/manager/magazine";
     }
     @RequestMapping(value = "/{uuid}/delete",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)

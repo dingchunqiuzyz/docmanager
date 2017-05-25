@@ -29,5 +29,5 @@ public interface PrizesMapper {
     int updateByPrimaryKey(Prizes record);
 
 
-    List<Prizes> selectPrizesWithTeachers(@Param("priName")String priName,@Param("teacherName")String teacherName);
+    List<Prizes> selectPrizesWithTeachers(@Param("priName") String priName, @Param("teacherName") String teacherName, @Param("teacherCode") Long teacherCode);
 }

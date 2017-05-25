@@ -77,7 +77,9 @@ public class PatentServiceImpl implements PatentService {
         return result;
     }
 
-    public PageInfo<Patents> selectPatentsWithTeachers(String patName,String teacherName,Integer pageNum) {
+
+
+    public PageInfo<Patents> selectPatentsWithTeachers(String patName, String teacherName, Long teacherCode, Integer pageNum) {
         PageHelper.startPage(pageNum, 10);
 
         if(patName!=null){
@@ -86,7 +88,7 @@ public class PatentServiceImpl implements PatentService {
         if(teacherName!=null){
             teacherName ="%"+teacherName+"%";
         }
-        List<Patents> patentses = pMapper.selectPatentsWithTeachers(patName,teacherName);
+        List<Patents> patentses = pMapper.selectPatentsWithTeachers(patName,teacherName,teacherCode);
         return new PageInfo<Patents>(patentses);
     }
 

@@ -75,7 +75,9 @@ public class PrizeServiceImpl implements PrizeService {
         return result;
     }
 
-    public PageInfo<Prizes> selectPrizisWithTeachers(Integer pageNum, String priName, String teacherName) {
+
+
+    public PageInfo<Prizes> selectPrizisWithTeachers(Integer pageNum, String priName, String teacherName, Long teacherCode) {
         PageHelper.startPage(pageNum, 10);
 
         if (priName != null) {
@@ -84,7 +86,7 @@ public class PrizeServiceImpl implements PrizeService {
         if (teacherName != null) {
             teacherName = "%" + teacherName + "%";
         }
-        List<Prizes> prizes = pMapper.selectPrizesWithTeachers(priName, teacherName);
+        List<Prizes> prizes = pMapper.selectPrizesWithTeachers(priName, teacherName,teacherCode);
         return new PageInfo<Prizes>(prizes);
     }
 

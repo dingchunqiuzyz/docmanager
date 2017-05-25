@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/prize")
-public class PrizeController {
+public class PrizeController extends BaseController{
     @Autowired
     private PrizeService ps;
 
@@ -40,11 +40,13 @@ public class PrizeController {
     }
 
     @RequestMapping("/manager")
-    public String manager(String priName,String teacherName,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
-        PageInfo<Prizes> info = ps.selectPrizisWithTeachers(pageNum,priName,teacherName);
+    public String manager(String priName,String teacherName,Long teacherCode,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
+        teacherCode=getLoginTeacherCode()==null?teacherCode:getLoginTeacherCode();
+        PageInfo<Prizes> info = ps.selectPrizisWithTeachers(pageNum,priName,teacherName,teacherCode);
         model.addAttribute("info",info);
         model.addAttribute("priName",priName);
         model.addAttribute("teacherName",teacherName);
+        model.addAttribute("teacherCode",teacherCode);
         return "/manager/prize";
     }
     @RequestMapping(value = "/{uuid}/delete",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)

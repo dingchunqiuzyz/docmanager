@@ -75,7 +75,9 @@ public class ProjectServiceImpl implements ProjectService {
         return result;
     }
 
-    public PageInfo<Projects> projectsWithTeachers(Integer pageNum, String proName, String teacherName) {
+
+
+    public PageInfo<Projects> projectsWithTeachers(Integer pageNum, String proName, String teacherName, Long teacherCode) {
         PageHelper.startPage(pageNum, 10);
 
         if(proName!=null){
@@ -84,7 +86,7 @@ public class ProjectServiceImpl implements ProjectService {
         if(teacherName!=null){
             teacherName ="%"+teacherName+"%";
         }
-        List<Projects> projectses = pMapper.selectWithTeachers(proName,teacherName);
+        List<Projects> projectses = pMapper.selectWithTeachers(proName,teacherName,teacherCode);
         return new PageInfo<Projects>(projectses);
     }
     @Transactional(readOnly = false)

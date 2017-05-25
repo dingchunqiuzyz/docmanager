@@ -12,7 +12,7 @@ public interface HonourService {
 
      int insert(Honours honours, String files);
 
-     PageInfo<Honours> selectHonoursWithTeachers(String hoName,String teacherName,Integer pageNum);
+     PageInfo<Honours> selectHonoursWithTeachers(String hoName, String teacherName, Integer pageNum, Long teacherCode);
 
      int delete(String uuid);
 

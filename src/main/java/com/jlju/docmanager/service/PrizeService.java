@@ -12,7 +12,7 @@ public interface PrizeService {
 
      int insert(Prizes prizes, String files);
 
-     PageInfo<Prizes> selectPrizisWithTeachers(Integer pageNum,String priName,String teacherName);
+     PageInfo<Prizes> selectPrizisWithTeachers(Integer pageNum, String priName, String teacherName, Long teacherCode);
 
      int delete(String uuid);
 

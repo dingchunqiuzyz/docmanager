@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/patent")
-public class PatentController {
+public class PatentController extends BaseController{
     @Autowired
     private PatentService ps;
 
@@ -40,8 +40,10 @@ public class PatentController {
 
 
     @RequestMapping("/manager")
-    public String manager(String patName,String teacherName,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
-        PageInfo<Patents> info = ps.selectPatentsWithTeachers(patName,teacherName,pageNum);
+    public String manager(String patName,String teacherName,Long teacherCode,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
+        //强制替换教工号
+        teacherCode=getLoginTeacherCode()==null?teacherCode:getLoginTeacherCode();
+        PageInfo<Patents> info = ps.selectPatentsWithTeachers(patName,teacherName,teacherCode,pageNum);
         model.addAttribute("info",info);
         model.addAttribute("patName",patName);
         model.addAttribute("teacherName",teacherName);

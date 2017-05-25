@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/report")
-public class ReportController {
+public class ReportController extends BaseController{
     @Autowired
     private ReportService rs;
 
@@ -38,11 +38,13 @@ public class ReportController {
 
     }
     @RequestMapping("/manager")
-    public String manager(String repName,String teacherName,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
-        PageInfo<Report> info = rs.selectReportWithTeachers(pageNum,repName,teacherName);
+    public String manager(String repName,String teacherName,Long teacherCode,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
+        teacherCode=getLoginTeacherCode()==null?teacherCode:getLoginTeacherCode();
+        PageInfo<Report> info = rs.selectReportWithTeachers(pageNum,repName,teacherName,teacherCode);
         model.addAttribute("info",info);
         model.addAttribute("repName",repName);
         model.addAttribute("teacherName",teacherName);
+        model.addAttribute("teacherCode",teacherCode);
         return "/manager/report";
     }
     @RequestMapping(value = "/{uuid}/delete",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)

@@ -26,14 +26,14 @@ import java.util.zip.ZipOutputStream;
  */
 @Controller
 @RequestMapping("/download")
-public class DownloadController {
+public class DownloadController extends BaseController{
     @Autowired
     private QueryCacheService service;
     @Value("#{configProperties['FileRoot']}")
     private String FILE_ROOT;
 
     @RequestMapping("/{cacheId}/one")
-    public void one(@PathVariable("cacheId") Integer cacheId, HttpServletResponse response) throws IOException {
+    public void one(@PathVariable("cacheId") Integer cacheId) throws IOException {
         QueryCache cache = service.selectById(cacheId);
         String path = cache.getFilePath();
         String realPath = FILE_ROOT + path;
@@ -41,7 +41,7 @@ public class DownloadController {
         try {
             InputStream in = new FileInputStream(new File(realPath));
             OutputStream os = response.getOutputStream();
-            downloadFile(in, cache.getFileName(), response);
+            downloadFile(in, cache.getFileName());
         } catch (Exception e) {
             //下载失败
             response.setCharacterEncoding("UTF-8");
@@ -52,7 +52,7 @@ public class DownloadController {
     }
 
     @RequestMapping("/many")
-    public void many(@RequestParam("ids") ArrayList<Integer> ids, HttpServletResponse response) throws IOException {
+    public void many(@RequestParam("ids") ArrayList<Integer> ids) throws IOException {
         try {
             List<QueryCache> caches = service.listByIds(ids);
             List<File> files = new ArrayList<File>();
@@ -68,7 +68,7 @@ public class DownloadController {
                 }
             }
             if (files.size() > 0) {
-                downZip(response, files, names);
+                downZip( files, names);
             }
         } catch (Exception e) {
             //下载失败
@@ -83,7 +83,7 @@ public class DownloadController {
      * 下载教师倒入excel模板
      */
     @RequestMapping("/teacherTemplate")
-    public void downloadTemplate(HttpServletRequest request, HttpServletResponse response) {
+    public void downloadTemplate() {
 
         //获取服务器真实路径
 
@@ -97,7 +97,7 @@ public class DownloadController {
                 request.getRequestDispatcher("/WEB-INF/jsp/message.jsp").forward(request,response);
             } else {//文件下载
                 inputStream = new FileInputStream(file);
-                downloadFile(inputStream,"教师信息导入模板.xlsx",response);
+                downloadFile(inputStream,"教师信息导入模板.xlsx");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,7 +114,7 @@ public class DownloadController {
 
     }
 
-    private void downloadFile(InputStream in, String fileName, HttpServletResponse response) throws IOException {
+    private void downloadFile(InputStream in, String fileName) throws IOException {
         ServletOutputStream os = null;
         try {
             response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
@@ -135,7 +135,7 @@ public class DownloadController {
         }
     }
 
-    private void downZip(HttpServletResponse response, List<File> files, List<String> names) throws Exception {
+    private void downZip( List<File> files, List<String> names) throws Exception {
         //创建压缩包
         response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(names.get(0) + "等多个文件.zip", "UTF-8"));
         response.setHeader("content-type", "application/octet-stream");

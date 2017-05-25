@@ -28,5 +28,5 @@ public interface HonoursMapper {
 
     int updateByPrimaryKey(Honours record);
 
-    List<Honours> selectHonoursWithTeachers(@Param("honName")String honName,@Param("teacherName")String teacherName);
+    List<Honours> selectHonoursWithTeachers(@Param("honName") String honName, @Param("teacherName") String teacherName, @Param("teacherCode")Long teacherCode);
 }

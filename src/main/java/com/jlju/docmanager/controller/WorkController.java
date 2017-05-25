@@ -1,7 +1,6 @@
 package com.jlju.docmanager.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.jlju.docmanager.bean.Magazine;
 import com.jlju.docmanager.bean.Works;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.WorkService;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/work")
-public class WorkController {
+public class WorkController extends BaseController{
     @Autowired
     private WorkService ws;
 
@@ -88,11 +87,13 @@ public class WorkController {
     }
 
     @RequestMapping("/manager")
-    public String manager(String workName,String teacherName,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
-        PageInfo<Works> info = ws.selectWroksWithTeachers(workName,teacherName,pageNum);
+    public String manager(String workName,String teacherName,Long teacherCode,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
+        teacherCode=getLoginTeacherCode()==null?teacherCode:getLoginTeacherCode();
+        PageInfo<Works> info = ws.selectWroksWithTeachers(workName,teacherName,pageNum,teacherCode);
         model.addAttribute("info",info);
         model.addAttribute("workName",workName);
         model.addAttribute("teacherName",teacherName);
+        model.addAttribute("teacherCode",teacherCode);
         return "/manager/work";
     }
 }

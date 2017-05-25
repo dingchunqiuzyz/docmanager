@@ -13,7 +13,7 @@ public interface ProjectService {
 
      int insert(Projects projects, String files);
 
-     PageInfo<Projects> projectsWithTeachers(Integer pageNum,String proName,String teacherName);
+     PageInfo<Projects> projectsWithTeachers(Integer pageNum, String proName, String teacherName, Long teacherCode);
 
      int delete(String uuid);
 

@@ -28,5 +28,5 @@ public interface PatentsMapper {
 
     int updateByPrimaryKey(Patents record);
 
-    List<Patents> selectPatentsWithTeachers(@Param("patentName")String patentName,@Param("teacherName")String teacherName);
+    List<Patents> selectPatentsWithTeachers(@Param("patentName") String patentName, @Param("teacherName") String teacherName, @Param("teacherCode") Long teacherCode);
 }

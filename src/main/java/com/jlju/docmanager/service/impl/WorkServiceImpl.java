@@ -77,7 +77,10 @@ public class WorkServiceImpl implements WorkService {
         }
         return result;
     }
-    public PageInfo<Works> selectWroksWithTeachers(String workName,String teacherName,Integer pageNum) {
+
+
+
+    public PageInfo<Works> selectWroksWithTeachers(String workName, String teacherName, Integer pageNum, Long teacherCode) {
         PageHelper.startPage(pageNum, 10);
 
         if(workName!=null){
@@ -86,7 +89,7 @@ public class WorkServiceImpl implements WorkService {
         if(teacherName!=null){
             teacherName ="%"+teacherName+"%";
         }
-        List<Works> workses = wMapper.selectWorksWithTeachers(workName,teacherName);
+        List<Works> workses = wMapper.selectWorksWithTeachers(workName,teacherName,teacherCode);
         return new PageInfo<Works>(workses);
     }
 

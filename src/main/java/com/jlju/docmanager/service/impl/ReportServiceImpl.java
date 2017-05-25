@@ -75,7 +75,9 @@ public class ReportServiceImpl implements ReportService{
         return result;
     }
 
-    public PageInfo<Report> selectReportWithTeachers(Integer pageNum, String repName, String teacherName) {
+
+
+    public PageInfo<Report> selectReportWithTeachers(Integer pageNum, String repName, String teacherName, Long teacherCode) {
         PageHelper.startPage(pageNum, 10);
 
         if(repName!=null){
@@ -84,7 +86,7 @@ public class ReportServiceImpl implements ReportService{
         if(teacherName!=null){
             teacherName ="%"+teacherName+"%";
         }
-        List<Report> projectses = mapper.selectReportWithTeachers(repName,teacherName);
+        List<Report> projectses = mapper.selectReportWithTeachers(repName,teacherName,teacherCode);
         return new PageInfo<Report>(projectses);
     }
     @Transactional(readOnly = false)

@@ -11,7 +11,7 @@ public interface WorkService {
 
 
      int insert(Works projects, String files);
-     PageInfo<Works> selectWroksWithTeachers(String workName,String teacherName,Integer pageNum);
+     PageInfo<Works> selectWroksWithTeachers(String workName, String teacherName, Integer pageNum, Long teacherCode);
 
      int delete(String uuid);
 

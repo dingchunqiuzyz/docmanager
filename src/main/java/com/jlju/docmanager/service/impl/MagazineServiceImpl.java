@@ -77,7 +77,9 @@ public class MagazineServiceImpl implements MagazineService {
         return result;
     }
 
-    public PageInfo<Magazine> queryMagazine(String magName,String teacherName,Integer pageNum) {
+
+
+    public PageInfo<Magazine> queryMagazine(String magName, String teacherName, Long teacherCode, Integer pageNum) {
         PageHelper.startPage(pageNum,10);
 
         if(magName!=null){
@@ -86,7 +88,7 @@ public class MagazineServiceImpl implements MagazineService {
         if(teacherName!=null){
             teacherName ="%"+teacherName+"%";
         }
-        List<Magazine> magazines = mMapper.selectMagazineWithTheacher(magName,teacherName);
+        List<Magazine> magazines = mMapper.selectMagazineWithTheacher(magName,teacherName,teacherCode);
         return new PageInfo<Magazine>(magazines);
     }
 

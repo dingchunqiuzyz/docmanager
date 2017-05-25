@@ -31,5 +31,5 @@ public interface ReportMapper {
 
 
 
-    List<Report> selectReportWithTeachers(@Param("repName") String repName, @Param("teacherName") String teacherName);
+    List<Report> selectReportWithTeachers(@Param("repName") String repName, @Param("teacherName") String teacherName, @Param("teacherCode") Long teacherCode);
 }

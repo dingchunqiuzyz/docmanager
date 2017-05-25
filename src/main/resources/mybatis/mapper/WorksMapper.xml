@@ -319,6 +319,9 @@
     <if test="teacherName != null and teacherName !='' " >
       and  t.teacher_name like #{teacherName}
     </if>
+    <if test="teacherCode != null and teacherCode !=0 " >
+      and  t.teacher_code = #{teacherCode}
+    </if>
 
   </select>
 </mapper>

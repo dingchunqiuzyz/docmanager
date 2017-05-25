@@ -13,7 +13,7 @@ public interface MagazineService {
 
      int insert(Magazine magazine,String files);
 
-     PageInfo<Magazine> queryMagazine(String magName,String teacherName,Integer pageNum);
+     PageInfo<Magazine> queryMagazine(String magName, String teacherName, Long teacherCode, Integer pageNum);
 
      int delete(String uuid);
 

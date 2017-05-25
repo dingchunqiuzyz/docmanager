@@ -13,7 +13,7 @@ public interface PatentService {
 
      int insert(Patents patents, String files);
 
-     PageInfo<Patents> selectPatentsWithTeachers(String patName,String teacherName,Integer pageNum);
+     PageInfo<Patents> selectPatentsWithTeachers(String patName, String teacherName, Long teacherCode, Integer pageNum);
 
      int delete(String uuid);
 

@@ -1,8 +1,10 @@
 package com.jlju.docmanager.controller;
 
+import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Honours;
 import com.jlju.docmanager.bean.Magazine;
+import com.jlju.docmanager.bean.Teachers;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.HonourService;
 import com.jlju.docmanager.service.MagazineService;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("/honour")
-public class HonourController {
+public class HonourController extends BaseController{
     @Autowired
     private HonourService hs;
 
@@ -38,11 +40,14 @@ public class HonourController {
 
     }
     @RequestMapping("/manager")
-    public String manager(String hoName,String teacherName,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
-        PageInfo<Honours> info = hs.selectHonoursWithTeachers(hoName,teacherName,pageNum);
+    public String manager(String hoName,String teacherName,Long teacherCode,@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,Model model){
+        //强制替换教工号
+        teacherCode=getLoginTeacherCode()==null?teacherCode:getLoginTeacherCode();
+        PageInfo<Honours> info = hs.selectHonoursWithTeachers(hoName,teacherName,pageNum,teacherCode);
         model.addAttribute("info",info);
         model.addAttribute("hoName",hoName);
         model.addAttribute("teacherName",teacherName);
+        model.addAttribute("teacherCode",teacherCode);
         return "/manager/honour";
     }
     @RequestMapping(value = "/{uuid}/delete",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
