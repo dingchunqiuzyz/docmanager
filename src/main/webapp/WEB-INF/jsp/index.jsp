@@ -30,7 +30,7 @@
 
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/echarts/mychart.js"></script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/dialog.js"></script>
 
 
 </html>

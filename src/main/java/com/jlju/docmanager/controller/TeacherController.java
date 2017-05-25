@@ -1,5 +1,6 @@
 package com.jlju.docmanager.controller;
 
+import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Teachers;
 import com.jlju.docmanager.dto.SugResult;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/teachers")
-public class TeacherController {
+public class TeacherController extends BaseController{
 
 
     @Autowired
@@ -46,6 +47,10 @@ public class TeacherController {
             if (teachers.getTeacherId() != null && teachers.getTeacherId() > 0) {
                 //修改
                 result = teacherService.updateTeachers(teachers);
+                Teachers teacher = (Teachers) session.getAttribute("teacher");
+                if(teacher!=null&&teacher.getTeacherCode().equals(teachers.getTeacherCode())){
+                    session.setAttribute("teacher",teachers);
+                }
             } else {
                 //添加
                 result = teacherService.insertTeachers(teachers);
