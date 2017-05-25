@@ -34,7 +34,7 @@ public class UserServiceImpl implements UsersSerivce {
     public int deleteUserById(int userId) {
         return mapper.deleteByPrimaryKey(userId);
     }
-
+    @Transactional(readOnly = true)
     public PageInfo<Users> queryPage(int pageNum, Users users) {
         //每页显示10条
         PageHelper.startPage(pageNum,10);
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UsersSerivce {
         PageInfo<Users> info = new PageInfo<Users>(userses);
         return info;
     }
-
+    @Transactional(readOnly = true)
     public Users selectById(Integer userid) {
         return mapper.selectByPrimaryKey(userid);
     }
@@ -63,6 +63,7 @@ public class UserServiceImpl implements UsersSerivce {
      * @param password
      * @return
      */
+    @Transactional(readOnly = true)
     public WebResult<Users> login(String username, String password) {
 
         UsersExample example = new UsersExample();

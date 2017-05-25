@@ -236,15 +236,19 @@
 
         function getSelectTeacherCode() {
             var fkTeacherCode = $("#fkTeacherCode").val();
-            if (fkTeacherCode == null || fkTeacherCode.length < 5) {
+            if (fkTeacherCode == null || fkTeacherCode.length < 2) {
                 Alert('请先选中教师编号！否则将不能上传文件');
-                //$('#upload li:eq(0) a').tab('show');
-                $("#homeTab").trigger('click');
 
                 return null;
-            } else {
-                return fkTeacherCode;
             }
+            //教师登录了
+            if(${sessionScope.teacher!=null} && fkTeacherCode!='${sessionScope.teacher.teacherCode}'){
+                Alert('当前选中的教师编号与登录者不一致请重新选择');
+
+                return null;
+            }
+
+                return fkTeacherCode;
         }
 
 

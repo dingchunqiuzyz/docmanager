@@ -1,13 +1,11 @@
 package com.jlju.docmanager.controller;
 
-import com.fasterxml.jackson.databind.deser.Deserializers;
 import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Honours;
-import com.jlju.docmanager.bean.Magazine;
-import com.jlju.docmanager.bean.Teachers;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.HonourService;
-import com.jlju.docmanager.service.MagazineService;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +20,16 @@ import org.springframework.web.bind.annotation.*;
 public class HonourController extends BaseController{
     @Autowired
     private HonourService hs;
+    @Autowired
+    private Validator validator;
 
     @RequestMapping(value = "/insert",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> insert(Honours honours,String files){
-
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, honours);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = hs.insert(honours, files);
             if(result>0){
@@ -87,7 +90,10 @@ public class HonourController extends BaseController{
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> update(Honours honours,String files){
-
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, honours);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = hs.update(honours, files);
             if(result>0){

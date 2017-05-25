@@ -133,7 +133,7 @@
                   <label class="col-sm-2 control-label">专利代码:</label>
 
                   <div class="col-sm-4 ">
-                    <input type="number" id="patCode" class="form-control" placeholder="专利代码"/>
+                    <input type="text" id="patCode" class="form-control" placeholder="专利代码"/>
                   </div>
 
                 </div>

@@ -6,6 +6,8 @@ import com.jlju.docmanager.bean.Report;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.MagazineService;
 import com.jlju.docmanager.service.ReportService;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +22,15 @@ import org.springframework.web.bind.annotation.*;
 public class ReportController extends BaseController{
     @Autowired
     private ReportService rs;
-
+    @Autowired
+    private Validator validator;
     @RequestMapping(value = "/insert",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> insert(Report report, String files){
-
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, report);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = rs.insert(report, files);
             if(result>0){
@@ -84,7 +90,10 @@ public class ReportController extends BaseController{
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> update(Report report,String files){
-
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, report);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = rs.update(report, files);
             if(result>0){

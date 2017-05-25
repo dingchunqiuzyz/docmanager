@@ -7,6 +7,8 @@ import com.jlju.docmanager.bean.Projects;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.PatentService;
 import com.jlju.docmanager.service.ProjectService;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +23,16 @@ import org.springframework.web.bind.annotation.*;
 public class PatentController extends BaseController{
     @Autowired
     private PatentService ps;
+    @Autowired
+    private Validator validator;
 
     @RequestMapping(value = "/insert",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> insert(Patents p,String files){
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, p);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = ps.insert(p, files);
             if(result>0){
@@ -86,7 +94,10 @@ public class PatentController extends BaseController{
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> update(Patents patents,String files){
-
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, patents);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = ps.update(patents, files);
             if(result>0){

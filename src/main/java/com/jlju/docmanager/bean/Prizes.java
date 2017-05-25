@@ -1,28 +1,37 @@
 package com.jlju.docmanager.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.Min;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 public class Prizes {
     private String priUuid;
-
+    @NotBlank(message = "奖项名称不能为空")
+    @Length(min = 4,max = 40,message = "奖项名称长度在4-40个字符之间")
     private String priName;
-
+    @NotBlank(message = "颁发单位不能为空")
+    @Length(min = 4,max = 40,message = "颁发单位长度在4-40个字符之间")
     private String priOrg;
 
     private String priRank;
+    @NotNull(message = "获奖时间不能为空")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date priDate;
-
+    @NotNull(message = "作者排名不能为空")
+    @Min(value = 1,message = "作者排名最小值为1")
     private Integer priTeacherOrder;
-
+    @NotNull(message = "本校排名不能为空")
+    @Min(value = 1,message = "本校排名最小值为1")
     private Integer priSchoolOrder;
 
     private String priType;
-
+    @NotNull(message = "教师编号尚未选择")
     private Long fkTeacherCode;
 
     public String getPriUuid() {

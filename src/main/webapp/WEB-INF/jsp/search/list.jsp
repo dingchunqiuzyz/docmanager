@@ -55,10 +55,11 @@
                 </div>
             </form>
 
-            <table class="table table-hover">
+            <table class="table table-hover ">
                 <thead>
                     <tr>
                         <th><input type="checkbox" class="checkbox" id="selectAllBtn"></th>
+                        <th >编号</th>
                         <th class="col-md-3 col-3 text-center">文件名称</th>
                         <th>作者</th>
                         <th>教工号</th>
@@ -72,9 +73,10 @@
                 </thead>
                 <tbody>
                 <c:forEach items="${info.list}" var="f" varStatus="vs">
-                    <tr>
+                    <tr ${vs.count%2==0?'class="success"':'class=""'}>
                         <td><input type="checkbox" class="checkbox" name="fileId" value="${f.cacheId}" ></td>
-                        <td class="col-md-3 col-3 text-center">${f.fileName}</td>
+                        <td>${vs.count}</td>
+                        <td class="col-md-3 col-3 text-left">${f.fileName}</td>
                         <td>${f.teacherName}</td>
                         <td>${f.fkTeacherCode}</td>
                         <td>${f.projectName}</td>

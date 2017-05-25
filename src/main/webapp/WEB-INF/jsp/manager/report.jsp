@@ -30,8 +30,8 @@
         <thead>
         <tr>
           <th>序号</th>
-          <th>名称</th>
-          <th>类型</th>
+          <th class="col-md-2  text-left">名称</th>
+          <th class="col-md-2 text-left">类型</th>
           <th>采用单位</th>
           <th>采用日期</th>
           <th>作者</th>
@@ -45,8 +45,8 @@
         <c:forEach items="${info.list}" var="h" varStatus="vs">
           <tr>
             <td>${vs.count}</td>
-            <td>${h.repName}</td>
-            <td>${h.repRank}</td>
+            <td  class="col-md-2  text-left"> ${h.repName}</td>
+            <td class="col-md-2  text-left">${h.repRank}</td>
             <td>${h.repOrg}</td>
             <td><fmt:formatDate value="${h.repDate}" pattern="yyyy-MM-dd"/></td>
             <td>${h.teachers.teacherName}</td>
