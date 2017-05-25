@@ -24,13 +24,20 @@ var college = {
         $.post(college.URL.editURL(), data, function (result) {
             //清空对象
             if (result) {
-                $("#collegeModal").modal('hide');
-                Alert({
-                    msg: result.message,
-                    onOk:function(){
-                        window.location.reload();
-                    }
-                });
+                if(result.success){
+                    $("#collegeModal").modal('hide');
+                    Alert({
+                        msg: result.message,
+                        onOk:function(){
+                            window.location.reload();
+                        }
+                    });
+                }else{
+                    Alert({
+                        msg: result.message
+                    });
+                }
+
 
             }
         });

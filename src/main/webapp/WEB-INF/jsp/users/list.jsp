@@ -96,13 +96,13 @@
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">账号:</label>
                                     <div class="col-sm-8 ">
-                                        <input type="text" id="username" class="form-control" placeholder="请输入账号" required/>
+                                        <input type="text" id="username" class="form-control" autocomplete="off" placeholder="请输入账号" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">密码:</label>
                                     <div class="col-sm-8 ">
-                                        <input type="password" id="password" class="form-control" placeholder="请输入密码" required/>
+                                        <input type="password" id="password" class="form-control" autocomplete="off" placeholder="请输入密码" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">

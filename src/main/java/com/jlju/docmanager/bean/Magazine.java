@@ -1,26 +1,34 @@
 package com.jlju.docmanager.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.Min;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 public class Magazine {
     private String magUuid;
-
+    @NotBlank(message = "论文名称不能为空")
+    @Length(min = 4,max = 40,message = "论文名称长度在4-40个字符之间")
     private String magName;
 
     private String magLevel;
+    @NotNull(message = "发表时间不能为空")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date magPubDate;
-
+    @NotNull(message = "教师排名不能为空")
+    @Min(value = 1,message = "排名最小值为1")
     private Integer magTeacherOrder;
-
+    @NotNull(message = "本校排名不能为空")
+    @Min(value = 1,message = "排名最小值为1")
     private Integer magSchoolOrder;
-
+    @NotNull(message = "教师编号尚未选择")
     private Long fkTeacherCode;
-
+    @NotBlank(message = "检索清空不能为空")
     private String magDeac;
 
 

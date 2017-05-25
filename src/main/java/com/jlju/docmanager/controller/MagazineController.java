@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Magazine;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.MagazineService;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,17 @@ import org.springframework.web.bind.annotation.*;
 public class MagazineController extends BaseController{
     @Autowired
     private MagazineService ms;
+    @Autowired
+    private Validator validator;
 
     @RequestMapping(value = "/insert",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> insert(Magazine magazine,String files){
+
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, magazine);
+        if(validateRet!=null){
+            return validateRet;
+        }
 
         try{
             int result = ms.insert(magazine, files);
@@ -83,7 +92,10 @@ public class MagazineController extends BaseController{
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> update(Magazine magazine,String files){
-
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, magazine);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = ms.update(magazine, files);
             if(result>0){

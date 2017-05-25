@@ -26,12 +26,12 @@
         <button class="btn bg-primary glyphicon glyphicon-zoom-in" id="btnSearch" type="submit">搜索</button>
       </form>
 
-      <table class="table table-hover">
+      <table class="table table-hover text-center">
         <thead>
         <tr>
           <th>序号</th>
-          <th>论文题目</th>
-          <th>成果类别</th>
+          <th class="col-md-2 col-2 text-center">论文题目</th>
+          <th class="col-md-2 col-2 text-center">成果类别</th>
           <th>发表时间</th>
           <th>作者排名</th>
           <th>校内排名</th>
@@ -151,7 +151,7 @@
 
                   <div class="col-sm-4 ">
                     <input type="number" class="form-control" min="1" id="magSchoolOrder"
-                           placeholder="作者排名"/>
+                           placeholder="本校排名"/>
                   </div>
                   <label class="col-sm-2 control-label ">检索情况:</label>
 

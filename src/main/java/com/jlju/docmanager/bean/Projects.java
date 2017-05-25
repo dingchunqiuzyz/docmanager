@@ -1,29 +1,38 @@
 package com.jlju.docmanager.bean;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.Min;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 public class Projects {
     private String proUuid;
-
+    @NotBlank(message = "项目名称不能为空")
+    @Length(min = 4,max = 40,message = "项目名称长度在4-40个字符之间")
     private String proName;
 
     private String proLevel;
+    @NotNull(message = "起始时间不能为空")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date proStartDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date proEndDate;
-
+    @NotBlank(message = "项目来源不能为空")
+    @Length(min = 2,max = 20,message = "项目来源长度在2-20个字符之间")
     private String proSource;
-
+    @NotNull(message = "项目经费不能为空")
+    @Min(value = 0,message = "项目经费必须大于0")
     private Float proFunds;
-
+    @NotNull(message = "排名不能为空")
+    @Min(value = 1,message = "排名最小值为1")
     private Integer proTeacherOrder;
-
+    @NotNull(message = "教师编号尚未选择")
     private Long fkTeacherCode;
 
     public String getProUuid() {

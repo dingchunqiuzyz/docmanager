@@ -1,14 +1,19 @@
 package com.jlju.docmanager.bean;
 
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.NotBlank;
+
 public class Users {
     private Integer userId;
-
+    @NotBlank(message = "账号不能为空")
+    @Length(min = 5,max = 16,message = "账号长度在5-16个字符之间")
     private String username;
-
+    @NotBlank(message = "密码不能为空")
+    @Length(min = 5,max = 16,message = "密码长度在5-16个字符之间")
     private String password;
-
+    @NotBlank(message = "姓名不能为空")
+    @Length(min = 2,max = 10,message = "账号长度在2-10个字符之间")
     private String realName;
-
     private String userType;
 
     public Integer getUserId() {

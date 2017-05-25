@@ -27,7 +27,7 @@
                         </div>
                         <!-- /btn-group -->
                     </div>
-                    <input class="form-control" type="text" placeholder="教工号"  id="fkTeacherCode" name="fkTeacherCode"  <c:if test="${sessionScope.teacher!=null}"> value="${sessionScope.teacher.teacherCode}" </c:if>  <c:if test="${sessionScope.teacher!=null}">value="${cache.fkTeacherCode}"</c:if>  readonly="readonly">
+                    <input class="form-control" type="text" placeholder="教工号"  id="fkTeacherCode" name="fkTeacherCode"  <c:if test="${sessionScope.teacher!=null}"> value="${sessionScope.teacher.teacherCode}" </c:if>  <c:if test="${sessionScope.teacher==null}">value="${cache.fkTeacherCode}"</c:if>  readonly="readonly">
                     <input class="form-control " type="text" name="fileName" value="${cache.fileName}"
                            placeholder="文件名称">
                     <select class="form-control" name="fileType" id="fileType">
@@ -51,7 +51,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>文件名称</th>
+                    <th class="col-md-3 col-3 text-center">文件名称</th>
                     <th>作者</th>
                     <th>教工号</th>
                     <th>主题</th>
@@ -62,7 +62,7 @@
                 <tbody>
                 <c:forEach items="${info.list}" var="f" varStatus="vs">
                     <tr>
-                        <td>${f.fileName}</td>
+                        <td class="col-md-3 col-3 text-center">${f.fileName}</td>
                         <td>${f.teacherName}</td>
                         <td>${f.fkTeacherCode}</td>
                         <td>${f.projectName}</td>
@@ -169,7 +169,7 @@
 
                                     <div class="col-sm-3 ">
                                         <input type="number" class="form-control" min="1" id="magSchoolOrder"
-                                               placeholder="作者排名"/>
+                                               placeholder="本校排名"/>
                                     </div>
                                     <label class="col-sm-1 control-label ">检索情况:</label>
 

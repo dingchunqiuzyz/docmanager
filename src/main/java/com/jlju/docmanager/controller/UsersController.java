@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Users;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.UsersSerivce;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ public class UsersController extends BaseController{
 
     @Autowired
     private UsersSerivce us;
+    @Autowired
+    private Validator validator;
     /**
      * 查询所有用户
      * @param model
@@ -35,6 +39,11 @@ public class UsersController extends BaseController{
     @RequestMapping(value = "/edit",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> editUsers(Users users){
+
+        WebResult<Void> webResult = ValidateUtils.validate(validator, users);
+        if(webResult!=null){
+            return webResult;
+        }
         int result = -1;
         try {
             if(users.getUserId()!=null&&users.getUserId()>0){

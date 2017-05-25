@@ -3,6 +3,9 @@ package com.jlju.docmanager.controller;
 import com.jlju.docmanager.bean.College;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.CollegeService;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.ConstraintViolation;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,8 @@ public class CollegeController {
 
     @Autowired
     private CollegeService collegeService;
+    @Autowired
+    private Validator validator;
 
     /**
      * 查询所有用户
@@ -46,6 +51,12 @@ public class CollegeController {
     @RequestMapping(value = "/edit", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> edit(College college) {
+        //校验参数
+        WebResult<Void> validateResult = ValidateUtils.validate(validator,college);
+        if (validateResult != null)
+            return validateResult;
+
+
         int result = -1;
         try {
             //添加
@@ -61,6 +72,8 @@ public class CollegeController {
         }
 
     }
+
+
 
     @RequestMapping(value = "/{collegeId}/delete", produces = {"application/json;charset=UTF-8"}, method = RequestMethod.POST)
     @ResponseBody

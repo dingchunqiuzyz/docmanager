@@ -60,5 +60,8 @@
         <property name="properties" ref="configProperties" />
     </bean>
 
+    <bean id="validator" class="net.sf.oval.Validator">
+
+    </bean>
 
 </beans>

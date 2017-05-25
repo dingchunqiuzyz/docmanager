@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Projects;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.ProjectService;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +21,16 @@ public class ProjectController extends BaseController{
     @Autowired
     private ProjectService ps;
 
+    @Autowired
+    private Validator validator;
+
     @RequestMapping(value = "/insert",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> insert(Projects projects,String files){
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, projects);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = ps.insert(projects, files);
             if(result>0){
@@ -81,7 +90,10 @@ public class ProjectController extends BaseController{
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> update(Projects projects,String files){
-
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, projects);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = ps.update(projects, files);
             if(result>0){

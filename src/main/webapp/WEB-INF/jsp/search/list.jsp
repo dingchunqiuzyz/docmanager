@@ -59,7 +59,7 @@
                 <thead>
                     <tr>
                         <th><input type="checkbox" class="checkbox" id="selectAllBtn"></th>
-                        <th>文件名称</th>
+                        <th class="col-md-3 col-3 text-center">文件名称</th>
                         <th>作者</th>
                         <th>教工号</th>
                         <th>主题</th>
@@ -74,7 +74,7 @@
                 <c:forEach items="${info.list}" var="f" varStatus="vs">
                     <tr>
                         <td><input type="checkbox" class="checkbox" name="fileId" value="${f.cacheId}" ></td>
-                        <td>${f.fileName}</td>
+                        <td class="col-md-3 col-3 text-center">${f.fileName}</td>
                         <td>${f.teacherName}</td>
                         <td>${f.fkTeacherCode}</td>
                         <td>${f.projectName}</td>

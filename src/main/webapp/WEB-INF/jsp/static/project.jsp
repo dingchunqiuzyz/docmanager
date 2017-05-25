@@ -54,14 +54,14 @@
 
                     <div class="col-sm-3 ">
                         <input type="text" class="form-control" id="proStartDate"
-                               onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="发表时间"/>
+                               onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="起始时间"/>
                     </div>
 
                     <label class="col-sm-2 control-label">结束时间:</label>
 
                     <div class="col-sm-3 ">
                         <input type="text" class="form-control" id="proEndDate"
-                               onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="发表时间"/>
+                               onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="结束时间"/>
                     </div>
                 </div>
                 <div class="form-group">

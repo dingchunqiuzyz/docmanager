@@ -181,6 +181,13 @@
       <artifactId>poi-ooxml</artifactId>
       <version>3.16</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/net.sf.oval/oval -->
+    <!-- 校验框架-->
+    <dependency>
+      <groupId>net.sf.oval</groupId>
+      <artifactId>oval</artifactId>
+      <version>1.31</version>
+    </dependency>
 
   </dependencies>
   <build>

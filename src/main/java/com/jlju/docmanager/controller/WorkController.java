@@ -4,6 +4,8 @@ import com.github.pagehelper.PageInfo;
 import com.jlju.docmanager.bean.Works;
 import com.jlju.docmanager.dto.WebResult;
 import com.jlju.docmanager.service.WorkService;
+import com.jlju.docmanager.utils.ValidateUtils;
+import net.sf.oval.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,16 @@ import org.springframework.web.bind.annotation.*;
 public class WorkController extends BaseController{
     @Autowired
     private WorkService ws;
+    @Autowired
+    private Validator validator;
 
     @RequestMapping(value = "/insert",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
     public WebResult<Void> insert(Works works,String files){
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, works);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
             int result = ws.insert(works, files);
             if(result>0){
@@ -71,10 +79,13 @@ public class WorkController extends BaseController{
 
     @RequestMapping(value = "/update",produces = {"application/json;charset=UTF-8"},method = RequestMethod.POST)
     @ResponseBody
-    public WebResult<Void> update(Works magazine,String files){
-
+    public WebResult<Void> update(Works work, String files){
+        WebResult<Void> validateRet = ValidateUtils.validate(validator, work);
+        if(validateRet!=null){
+            return validateRet;
+        }
         try{
-            int result = ws.update(magazine, files);
+            int result = ws.update(work, files);
             if(result>0){
                 return new WebResult<Void>(true,"更新成功");
             }else{
