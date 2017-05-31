@@ -2,7 +2,7 @@
 <%--引入head--%>
 <%@include file="/WEB-INF/jsp/commonhead.jsp" %>
 <link rel="stylesheet" type="text/css"
-      href="/resource/css/webuploader.css">
+      href="${pageContext.request.contextPath}/resource/css/webuploader.css">
 <body>
 <%@include file="/WEB-INF/jsp/commonNav.jsp"%>
 <!-- 已经上传的文件检索-->
@@ -12,7 +12,7 @@
             <h3 class="panel-title text-center">已经上传的文件</h3>
         </div>
         <div class="panel-body">
-            <form class="form-inline col-sm-offset-1" id="userForm" action="/search/hasUpload" method="post">
+            <form class="form-inline col-sm-offset-1" id="userForm" action="${pageContext.request.contextPath}/search/hasUpload" method="post">
                 <div class="row ">
                     <input type="hidden" id="pageNum" name="pageNum" value="${info.pageNum}"/>
 
@@ -218,13 +218,16 @@
 
 <%@include file="/WEB-INF/jsp/commonjs.jsp" %>
 <%--本页面用到的js --%>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script src="${pageContext.request.contextPath}/resource/js/bootstrap-suggest.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/search.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
 
-<script type="text/javascript" src="/resource/js/webuploader.js"></script>
-<script type="text/javascript" src="/resource/js/engine/upload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/webuploader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/upload.js"></script>
 
 <script>
     //重新刷新
@@ -263,7 +266,7 @@
             //跳转界面
             var code = getSelectTeacherCode();
             if (code != null) {
-                var url = "/uploadpage/" + code + "/project";
+                var url = common.basePath+"/uploadpage/" + code + "/project";
                 changeIFrameURL(url);
             }
         });
@@ -271,7 +274,7 @@
         $("#work").click(function(){
             var code = getSelectTeacherCode();
             if (code != null) {
-                var url = "/uploadpage/" + code + "/work";
+                var url = common.basePath+"/uploadpage/" + code + "/work";
                 changeIFrameURL(url);
             }
         });
@@ -280,7 +283,7 @@
         $("#patents").click(function(){
             var code = getSelectTeacherCode();
             if (code != null) {
-                var url = "/uploadpage/" + code + "/patent";
+                var url = common.basePath+"/uploadpage/" + code + "/patent";
                 changeIFrameURL(url);
             }
         });
@@ -289,7 +292,7 @@
         $("#prizes").click(function(){
             var code = getSelectTeacherCode();
             if (code != null) {
-                var url = "/uploadpage/" + code + "/prize";
+                var url = common.basePath+"/uploadpage/" + code + "/prize";
                 changeIFrameURL(url);
             }
         });
@@ -298,7 +301,7 @@
         $("#honour").click(function(){
             var code = getSelectTeacherCode();
             if (code != null) {
-                var url = "/uploadpage/" + code + "/honour";
+                var url = common.basePath+"/uploadpage/" + code + "/honour";
                 changeIFrameURL(url);
             }
         });
@@ -306,7 +309,7 @@
         $("#report").click(function(){
             var code = getSelectTeacherCode();
             if (code != null) {
-                var url = "/uploadpage/" + code + "/report";
+                var url = common.basePath+"/uploadpage/" + code + "/report";
                 changeIFrameURL(url);
             }
         });
@@ -345,7 +348,7 @@
                 "magDeac":magDeac
             };
 
-            $.post("/magazine/insert", data, function (result) {
+            $.post(common.basePath+"/magazine/insert", data, function (result) {
                 //清空对象
 
                 if (result) {

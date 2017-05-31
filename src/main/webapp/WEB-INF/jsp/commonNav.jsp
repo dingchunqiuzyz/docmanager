@@ -150,7 +150,7 @@
   $(function(){
 
       function updateLoginTeacherInfo() {
-          $.get("/college/queryAll", function(result){
+          $.get(common.basePath+"/college/queryAll", function(result){
               //学院下拉框
               var selectNode=$("#loginCollege");
               if(result&&result.success) {
@@ -199,7 +199,7 @@
               "college":college,
               "password":password
           };
-          $.post("/teachers/edit",teacher,function(data){
+          $.post(common.basePath+"/teachers/edit",teacher,function(data){
               if(data&&data.success){
                   // 编辑成功：隐藏显示框，刷新界面
                   Alert({
@@ -248,7 +248,7 @@
         "userType":'${sessionScope.users.userType}'
       };
 
-      $.post("/users/update",user,function(data){
+      $.post(common.basePath+"/users/update",user,function(data){
         if(data&&data.success){
           // 编辑成功：隐藏显示框，刷新界面
           $("#loginUser").modal('hide');

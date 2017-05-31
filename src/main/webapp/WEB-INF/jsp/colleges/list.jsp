@@ -92,6 +92,8 @@
 <%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 
 <%--本页面用到的js --%>
-
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/college.js"></script>
 </html>

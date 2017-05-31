@@ -9,13 +9,13 @@ var project = {
     //用户相关的url
     URL: {
         queryById: function (uuid) {
-            return "/project/" + uuid + "/detail";
+            return common.basePath+"/project/" + uuid + "/detail";
         },
         editURL: function () {
-            return "/project/update";
+            return common.basePath+"/project/update";
         },
         deleteURL: function (uuid) {
-            return "/project/" + uuid + "/delete";
+            return common.basePath+"/project/" + uuid + "/delete";
         }
 
     },
@@ -75,7 +75,7 @@ var project = {
             "proFunds":proFunds
         };
 
-        $.post("/project/update", data, function (result) {
+        $.post(project.URL.editURL(), data, function (result) {
             //清空对象
             if (result) {
                 if (result.success) {

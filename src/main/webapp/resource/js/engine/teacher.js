@@ -9,16 +9,16 @@ var teachers={
     //用户相关的url
     URL:{
         queryById:function(id){
-            return "/teachers/"+id+"/detail";
+            return common.basePath+"/teachers/"+id+"/detail";
         },
         editURL:function(){
-            return "/teachers/edit";
+            return common.basePath+"/teachers/edit";
         },
         deleteURL:function(id){
-            return "/teachers/"+id+"/delete";
+            return common.basePath+"/teachers/"+id+"/delete";
         },
         queryCollege:function(){
-            return "/college/queryAll";
+            return common.basePath+"/college/queryAll";
         }
 
     },

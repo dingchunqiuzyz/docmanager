@@ -144,10 +144,10 @@ public class TeacherController extends BaseController{
         try {
             teacherService.batchInsert(file);
             message = "成功添加教师信息到教师库中！";
-            webResult = new WebResult<String>(true, message, "/teachers/list");//导出更高
+            webResult = new WebResult<String>(true, message, request.getContextPath()+"/teachers/list");//导出更高
         } catch (Exception e) {
             message = e.getMessage();
-            webResult = new WebResult<String>(false, message, "/teachers/toPage/import");//重新导入
+            webResult = new WebResult<String>(false, message, request.getContextPath()+"/teachers/toPage/import");//重新导入
         }
 
         model.addAttribute("result", webResult);

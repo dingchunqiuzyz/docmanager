@@ -2,7 +2,7 @@
 <%--引入head--%>
 <%@include file="/WEB-INF/jsp/commonhead.jsp" %>
 <link rel="stylesheet" type="text/css"
-      href="/resource/css/webuploader.css">
+      href="${pageContext.request.contextPath}/resource/css/webuploader.css">
 <body>
 <div class="container-fluid">
     <div class="panel panel-primary  text-center wd">
@@ -86,12 +86,14 @@
 </div>
 </body>
 <%@include file="/WEB-INF/jsp/commonjs.jsp" %>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/webuploader.js"></script>
-<script type="text/javascript" src="/resource/js/engine/upload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/upload.js"></script>
 <script>
     $(function () {
-
         //上传界面
         $("#uploadBtn").click(function () {
             var teacherCode = '${teacherCode}';
@@ -123,7 +125,7 @@
                 "priOrg":priOrg
             };
 
-            $.post("/prize/insert", data, function (result) {
+            $.post(common.basePath+"/prize/insert", data, function (result) {
                 //清空对象
                 if (result) {
                     if (result.success) {

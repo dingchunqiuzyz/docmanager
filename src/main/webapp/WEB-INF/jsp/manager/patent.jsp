@@ -3,7 +3,7 @@
 <%--引入head--%>
 <%@include file="/WEB-INF/jsp/commonhead.jsp"%>
 <link rel="stylesheet" type="text/css"
-      href="/resource/css/webuploader.css">
+      href="${pageContext.request.contextPath}/resource/css/webuploader.css">
 <body>
 <%@include file="/WEB-INF/jsp/commonNav.jsp"%>
 <div class="container-fluid">
@@ -12,7 +12,7 @@
       <h3 class="panel-title text-center">专利类文档管理</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline col-sm-offset-1" id="userForm" action="/patent/manager" method="post">
+      <form class="form-inline col-sm-offset-1" id="userForm" action="${pageContext.request.contextPath}/patent/manager" method="post">
         <input type="hidden" id="pageNum" name="pageNum" value="${info.size==0?'1':info.pageNum}"/>
         <input class="form-control" type="text" name="patName" value="${patName}" placeholder="专利名称">
         <c:if test="${sessionScope.teacher!=null}">
@@ -114,7 +114,7 @@
                   <label class="col-sm-2 control-label">专利类型:</label>
 
                   <div class="col-sm-4 ">
-                    <select class="form-control" id="patType" placeholder="类型">
+                    <select class="form-control" id="patType" >
                       <option value="发明专利">发明专利</option>
                       <option value="实用新型专利">实用新型专利</option>
                       <option value="外观设计专利">外观设计专利</option>
@@ -186,9 +186,12 @@
 <%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 
 <%--本页面用到的js --%>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
 
-<script type="text/javascript" src="/resource/js/webuploader.js"></script>
-<script type="text/javascript" src="/resource/js/engine/upload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/webuploader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/upload.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/patent.js"></script>
 </html>

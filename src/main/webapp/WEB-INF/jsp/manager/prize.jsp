@@ -3,7 +3,7 @@
 <%--引入head--%>
 <%@include file="/WEB-INF/jsp/commonhead.jsp"%>
 <link rel="stylesheet" type="text/css"
-      href="/resource/css/webuploader.css">
+      href="${pageContext.request.contextPath}/resource/css/webuploader.css">
 <body>
 <%@include file="/WEB-INF/jsp/commonNav.jsp"%>
 <div class="container-fluid">
@@ -12,7 +12,7 @@
       <h3 class="panel-title text-center">成果获奖文档管理</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline col-sm-offset-1" id="userForm" action="/prize/manager" method="post">
+      <form class="form-inline col-sm-offset-1" id="userForm" action="${pageContext.request.contextPath}/prize/manager" method="post">
         <input type="hidden" id="pageNum" name="pageNum" value="${info.size==0?'1':info.pageNum}"/>
         <input class="form-control" type="text" name="priName" value="${priName}" placeholder="奖项名称">
         <c:if test="${sessionScope.teacher!=null}">
@@ -114,7 +114,7 @@
                   <label class="col-sm-2 control-label">奖项级别:</label>
 
                   <div class="col-sm-4 ">
-                    <select class="form-control" id="priRank" placeholder="项目类型">
+                    <select class="form-control" id="priRank" >
                       <option value="国家级科技成果一等奖">国家级科技成果一等奖</option>
                       <option value="国家级科技成果二等奖">国家级科技成果二等奖</option>
                       <option value="省部级政府奖项一等奖">省部级政府奖项一等奖</option>
@@ -191,9 +191,12 @@
 <%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 
 <%--本页面用到的js --%>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
 
-<script type="text/javascript" src="/resource/js/webuploader.js"></script>
-<script type="text/javascript" src="/resource/js/engine/upload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/webuploader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/upload.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/prize.js"></script>
 </html>

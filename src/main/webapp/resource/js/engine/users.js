@@ -9,13 +9,13 @@ var users={
     //用户相关的url
     URL:{
         queryById:function(id){
-            return "/users/"+id+"/detail";
+            return common.basePath+"/users/"+id+"/detail";
         },
         editURL:function(){
-            return "/users/edit";
+            return common.basePath+"/users/edit";
         },
         deleteURL:function(userid){
-            return "/users/"+userid+"/delete";
+            return common.basePath+"/users/"+userid+"/delete";
         }
 
     },

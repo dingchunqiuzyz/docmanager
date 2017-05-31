@@ -9,13 +9,13 @@ var honour = {
     //用户相关的url
     URL: {
         queryById: function (uuid) {
-            return "/honour/" + uuid + "/detail";
+            return common.basePath+"/honour/" + uuid + "/detail";
         },
         editURL: function () {
-            return "/honour/update";
+            return common.basePath+"/honour/update";
         },
         deleteURL: function (uuid) {
-            return "/honour/" + uuid + "/delete";
+            return common.basePath+"/honour/" + uuid + "/delete";
         }
 
     },

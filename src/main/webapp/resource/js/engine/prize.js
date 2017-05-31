@@ -9,13 +9,13 @@ var prize = {
     //用户相关的url
     URL: {
         queryById: function (uuid) {
-            return "/prize/" + uuid + "/detail";
+            return common.basePath+"/prize/" + uuid + "/detail";
         },
         editURL: function () {
-            return "/prize/update";
+            return common.basePath+"/prize/update";
         },
         deleteURL: function (uuid) {
-            return "/prize/" + uuid + "/delete";
+            return common.basePath+"/prize/" + uuid + "/delete";
         }
 
     },

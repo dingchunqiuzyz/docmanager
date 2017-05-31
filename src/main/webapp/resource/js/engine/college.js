@@ -4,10 +4,10 @@ var college = {
     URL: {
 
         editURL: function () {
-            return "/college/edit";
+            return common.basePath+"/college/edit";
         },
         deleteURL: function (collegeId) {
-            return "/college/" + collegeId + "/delete";
+            return common.basePath+"/college/" + collegeId + "/delete";
         }
 
     },

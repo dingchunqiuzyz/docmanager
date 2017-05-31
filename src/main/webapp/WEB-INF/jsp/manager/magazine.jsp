@@ -3,7 +3,7 @@
 <%--引入head--%>
 <%@include file="/WEB-INF/jsp/commonhead.jsp"%>
 <link rel="stylesheet" type="text/css"
-      href="/resource/css/webuploader.css">
+      href="${pageContext.request.contextPath}/resource/css/webuploader.css">
 <body>
 <%@include file="/WEB-INF/jsp/commonNav.jsp"%>
 <div class="container-fluid">
@@ -12,7 +12,7 @@
       <h3 class="panel-title text-center">学术论文管理</h3>
     </div>
     <div class="panel-body">
-      <form class="form-inline col-sm-offset-1" id="userForm" action="/magazine/manager" method="post">
+      <form class="form-inline col-sm-offset-1" id="userForm" action="${pageContext.request.contextPath}/magazine/manager" method="post">
         <input type="hidden" id="pageNum" name="pageNum" value="${info.size==0?'1':info.pageNum}"/>
         <input class="form-control" type="text" name="magName" value="${magName}" placeholder="论文题目">
         <c:if test="${sessionScope.teacher!=null}">
@@ -196,9 +196,12 @@
 <%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 
 <%--本页面用到的js --%>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/My97DatePicker/WdatePicker.js"></script>
 
-<script type="text/javascript" src="/resource/js/webuploader.js"></script>
-<script type="text/javascript" src="/resource/js/engine/upload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/webuploader.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/upload.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/magazine.js"></script>
 </html>

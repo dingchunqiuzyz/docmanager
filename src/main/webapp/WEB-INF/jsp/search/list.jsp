@@ -11,7 +11,7 @@
             <h3 class="panel-title text-center">文件检索</h3>
         </div>
         <div class="panel-body">
-            <form class="form-inline col-sm-offset-1" id="userForm" action="/search/list" method="post">
+            <form class="form-inline col-sm-offset-1" id="userForm" action="${pageContext.request.contextPath}/search/list" method="post">
                 <div class="row ">
 
 
@@ -128,6 +128,9 @@
 <%@include file="/WEB-INF/jsp/commonjs.jsp"%>
 <script src="${pageContext.request.contextPath}/resource/js/bootstrap-suggest.min.js"></script>
 <%--本页面用到的js --%>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/search.js"></script>
 
 
@@ -153,7 +156,7 @@
                 Alert('请选中要下载的文件!');
                 return;
             }
-            var url ="/download/many?ids=";
+            var url =common.basePath+"/download/many?ids=";
             var ids = new Array();
             idsCheck.each(function(index,elemtnt){
                 ids.push(elemtnt.value);

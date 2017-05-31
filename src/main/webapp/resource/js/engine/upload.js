@@ -1,13 +1,13 @@
-var BASE_URL = "/upload";
+var BASE_URL = common.basePath+"/upload";
 var filesupload = new Array();
 
 var uploader = WebUploader.create({
 
     // swf文件路径
-    swf :'/js/Uploader.swf',
+    swf :common.basePath+'/js/Uploader.swf',
 
     // 文件接收服务端。
-    server : '/upload',
+    server : common.basePath+'/upload',
     // 选择文件的按钮。可选。
     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
     pick : '#picker',

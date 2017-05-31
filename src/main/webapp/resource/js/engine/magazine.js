@@ -9,13 +9,13 @@ var magazine={
     //用户相关的url
     URL:{
         queryById:function(uuid){
-            return "/magazine/"+uuid+"/detail";
+            return common.basePath+"/magazine/"+uuid+"/detail";
         },
         editURL:function(){
-            return "/magazine/update";
+            return common.basePath+"/magazine/update";
         },
         deleteURL:function(uuid){
-            return "/magazine/"+uuid+"/delete";
+            return common.basePath+"/magazine/"+uuid+"/delete";
         }
 
     },

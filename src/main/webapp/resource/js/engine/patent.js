@@ -9,13 +9,13 @@ var patent={
     //用户相关的url
     URL:{
         queryById:function(uuid){
-            return "/patent/"+uuid+"/detail";
+            return common.basePath+"/patent/"+uuid+"/detail";
         },
         editURL:function(){
-            return "/patent/update";
+            return common.basePath+"/patent/update";
         },
         deleteURL:function(uuid){
-            return "/patent/"+uuid+"/delete";
+            return common.basePath+"/patent/"+uuid+"/delete";
         }
 
     },

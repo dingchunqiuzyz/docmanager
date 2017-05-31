@@ -11,7 +11,7 @@
             <h3 class="panel-title text-center">系统用户管理</h3>
         </div>
         <div class="panel-body">
-            <form class="form-inline col-sm-offset-2" id="userForm" action="/users/list" method="post">
+            <form class="form-inline col-sm-offset-2" id="userForm" action="${pageContext.request.contextPath}/users/list" method="post">
                 <input type="hidden" id="pageNum" name="pageNum" value="${info.pageNum}"/>
                 <input class="form-control" type="text" name="username" value="${requestScope.users.username}" placeholder="账号">
                 <input class="form-control" type="text" name="realName" value="${requestScope.users.realName}" placeholder="姓名">
@@ -131,5 +131,8 @@
 <%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%@include file="/WEB-INF/jsp/commonjs.jsp"%>
 <%--本页面用到的js --%>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/users.js"></script>
 </html>

@@ -11,7 +11,7 @@
             <h3 class="panel-title text-center">教师信息管理</h3>
         </div>
         <div class="panel-body">
-            <form class="form-inline col-sm-offset-2" id="userForm" action="/teachers/list" method="post">
+            <form class="form-inline col-sm-offset-2" id="userForm" action="${pageContext.request.contextPath}/teachers/list" method="post">
                 <input type="hidden" id="pageNum" name="pageNum" value="${info.pageNum}"/>
                 <input class="form-control" type="text" name="teacherName" value="${teachers.teacherName}" placeholder="姓名">
                 <input class="form-control" type="text" name="realName" value="${teacherCode.teacherCode}" placeholder="教工号">
@@ -134,5 +134,8 @@
 <%@include file="/WEB-INF/jsp/commonBottom.jsp" %>
 <%@include file="/WEB-INF/jsp/commonjs.jsp"%>
 <%--本页面用到的js --%>
+<script>
+    common.init('${pageContext.request.contextPath}');
+</script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/engine/teacher.js"></script>
 </html>

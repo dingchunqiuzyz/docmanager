@@ -17,7 +17,7 @@ var mysearch = {
     },
     URL: {
         queryTeacher: function () {
-            return "/teachers/queryTeacher";
+            return common.basePath+"/teachers/queryTeacher";
         }
     },
 
@@ -66,7 +66,7 @@ $(function () {
         allowNoKeyword: false,
         getDataMethod: "url",
         delayUntilKeyup: true,
-        url: "/teachers/queryTeacher?d=" + new Date().getTime(),
+        url: common.basePath+"/teachers/queryTeacher?d=" + new Date().getTime(),
         idField: "teacherCode",
         effectiveFields: ["college", "teacherName", "teacherCode"],
         effectiveFieldsAlias: {teacherName: "姓名", college: "学院", teacherCode: "教工号"}, //有效字段别名

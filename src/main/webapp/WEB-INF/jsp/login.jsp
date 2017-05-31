@@ -71,7 +71,7 @@
                     "password": password
                 };
 
-                $.post("/auth/login", user, function (data) {
+                $.post("${pageContext.request.contextPath}/auth/login", user, function (data) {
                     if (data && data.success) {
                         window.location.href = "${pageContext.request.contextPath}/topage/index";
                     } else {
@@ -95,7 +95,7 @@
                     "password": password
                 };
 
-                $.post("/auth/teacherLogin", user, function (data) {
+                $.post("${pageContext.request.contextPath}/auth/teacherLogin", user, function (data) {
                     if (data && data.success) {
                         window.location.href = "${pageContext.request.contextPath}/topage/index";
                     } else {

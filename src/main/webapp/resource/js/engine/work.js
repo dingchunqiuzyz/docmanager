@@ -9,13 +9,13 @@ var work={
     //用户相关的url
     URL:{
         queryById:function(uuid){
-            return "/work/"+uuid+"/detail";
+            return common.basePath+"/work/"+uuid+"/detail";
         },
         editURL:function(){
-            return "/work/update";
+            return common.basePath+"/work/update";
         },
         deleteURL:function(uuid){
-            return "/work/"+uuid+"/delete";
+            return common.basePath+"/work/"+uuid+"/delete";
         }
 
     },

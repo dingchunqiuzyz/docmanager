@@ -106,7 +106,7 @@ $(function(){
 
         pie.setOption(pieOption);
     }
-    $.get("/search/count",function (data) {
+    $.get(common.basePath+"/search/count",function (data) {
         if(data&&data.success){//访问数据成功
 
             var barData = data.data.bar;

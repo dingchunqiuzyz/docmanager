@@ -9,13 +9,13 @@ var report = {
     //用户相关的url
     URL: {
         queryById: function (uuid) {
-            return "/report/" + uuid + "/detail";
+            return common.basePath+"/report/" + uuid + "/detail";
         },
         editURL: function () {
-            return "/report/update";
+            return common.basePath+"/report/update";
         },
         deleteURL: function (uuid) {
-            return "/report/" + uuid + "/delete";
+            return common.basePath+"/report/" + uuid + "/delete";
         }
 
     },
