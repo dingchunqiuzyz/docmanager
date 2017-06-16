@@ -39,13 +39,6 @@ public class SearchServiceImpl implements SearchService{
             criteria.andFileNameLike("%"+cache.getFileName()+"%");
         }
 
-        if(cache.getStartDate()!=null){
-            criteria.andFileDateGreaterThanOrEqualTo(cache.getStartDate());
-        }
-
-        if(cache.getEndDate()!=null){
-            criteria.andFileDateLessThanOrEqualTo(cache.getEndDate());
-        }
 
         if(cache.getFileType()==null){
             cache.setFileType("");

@@ -64,7 +64,7 @@ public class DownloadController extends BaseController{
                     if (!file.exists())
                         throw new Exception(c.getFileName());
                     files.add(file);
-                    names.add((i + 1) + c.getFileName());
+                    names.add(renameFile((i + 1) ,c.getFileName()));
                 }
             }
             if (files.size() > 0) {
@@ -77,6 +77,12 @@ public class DownloadController extends BaseController{
             response.getWriter().println("<script type='text/javascript'>alert('对不起你要下载" + e.getMessage() + "的内容不存在');window.history.back();</script>");
         }
 
+    }
+
+    private String renameFile(int i, String fileName) {
+        StringBuilder sb = new StringBuilder();
+        int pos=fileName.lastIndexOf(".");
+       return sb.append(fileName.substring(0,pos)).append("(").append(i).append(").").append(fileName.substring(pos+1)).toString();
     }
 
     /**
@@ -137,7 +143,7 @@ public class DownloadController extends BaseController{
 
     private void downZip( List<File> files, List<String> names) throws Exception {
         //创建压缩包
-        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode(names.get(0) + "等多个文件.zip", "UTF-8"));
+        response.setHeader("Content-disposition", "attachment;filename=" + URLEncoder.encode("批量下载_"+names.get(0) + "等多个文件.zip", "UTF-8"));
         response.setHeader("content-type", "application/octet-stream");
         OutputStream os = response.getOutputStream();
         ZipOutputStream zos = new ZipOutputStream(os);

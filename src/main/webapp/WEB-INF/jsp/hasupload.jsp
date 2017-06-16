@@ -54,7 +54,7 @@
                     <th class="col-md-3 col-3 text-center">文件名称</th>
                     <th>作者</th>
                     <th>教工号</th>
-                    <th>主题</th>
+                    <th class="col-md-3 col-3 text-center">主题</th>
                     <th>时间</th>
                     <th>类别</th>
                 </tr>
@@ -62,10 +62,10 @@
                 <tbody>
                 <c:forEach items="${info.list}" var="f" varStatus="vs">
                     <tr>
-                        <td class="col-md-3 col-3 text-center">${f.fileName}</td>
+                        <td class="col-md-3 col-3 text-left">${f.fileName}</td>
                         <td>${f.teacherName}</td>
                         <td>${f.fkTeacherCode}</td>
-                        <td>${f.projectName}</td>
+                        <td class="col-md-3 col-3 text-left">${f.projectName}</td>
                         <td><fmt:formatDate value="${f.fileDate}" pattern="yyyy-MM-dd"/></td>
                         <td>${f.fileType}</td>
                     </tr>

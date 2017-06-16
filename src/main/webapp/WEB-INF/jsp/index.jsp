@@ -6,7 +6,7 @@
 <body>
 
 
-<%@include file="/WEB-INF/jsp/commonBottom.jsp"%>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/echarts/echarts.common.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resource/js/echarts/macarons.js"></script>
 </body>
@@ -29,6 +29,7 @@
     </div>
 
 </div>
+<%@include file="/WEB-INF/jsp/commonBottom.jsp"%>
 <script>
     common.init('${pageContext.request.contextPath}');
 </script>

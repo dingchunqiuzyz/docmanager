@@ -69,13 +69,9 @@ public class SearchController {
     @RequestMapping(value = "/count",produces = {"application/json;charset=UTF-8"},method = RequestMethod.GET)
     @ResponseBody
     public WebResult<Map<String,Object>> count(){
-
         try{
             List<Data> top6Datas = queryCacheService.countFileTop6();
-
             List<Data> fileTypeDatas = queryCacheService.countFileType();
-
-
 //            /////柱状体
             Title barTitle = new Title();
             barTitle.setText("上传文档数量前六名");
@@ -83,23 +79,18 @@ public class SearchController {
             Bar bar = new Bar();
             bar.setDatas(top6Datas);
             bar.setTitle(barTitle);
-
 //            ////饼状图
-//
             Title pieTitle = new Title();
             pieTitle.setText("上传文档类型分布比例");
             pieTitle.setSubtext("按面积展示%");
             pieTitle.setX("center");
-//
             Pie pie = new Pie();
             pie.setTitle(pieTitle);
             pie.setDatas(fileTypeDatas);
-
             Map<String,Object> map =new HashMap<>();
             map.put("bar",bar);
             map.put("pie",pie);
             return new WebResult<Map<String,Object>>(true,"统计成功!",map);
-
         }catch (Exception e){
             return new WebResult<Map<String,Object>>(false,"统计失败！"+e.getMessage());
         }
