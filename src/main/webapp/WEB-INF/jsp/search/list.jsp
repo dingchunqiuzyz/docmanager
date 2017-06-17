@@ -24,7 +24,7 @@
                 <div class="row ">
                     <input type="hidden" id="pageNum" name="pageNum" value="${info.size==0?'1':info.pageNum}"/>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="teacherName" name="teacherName" value="${cache.teacherName}" placeholder="教师名称">
+                        <input type="text" class="form-control"  id="teacherName" name="teacherName" value="${cache.teacherName}" placeholder="教师名称">
                         <div class="input-group-btn">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" value="">
                                 重新选

@@ -83,7 +83,12 @@ $(function () {
                     teacherName:  keyword
                 }
             };
-        }
+        },
+        listStyle: {
+
+            'width': '400'
+
+        },
     }).on('onDataRequestSuccess', function (e, result) {
         console.log('onDataRequestSuccess: ', result);
     }).on('onSetSelectValue', function (e, keyword, data) {

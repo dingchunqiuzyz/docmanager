@@ -56,11 +56,11 @@
                     <div id="thelist" class="uploader-list"></div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 " id="picker">
+                    <label class="col-sm-2 col-sm-offset-2" id="picker">
                         选中文件
                     </label>
 
-                    <div class="col-sm-2 col-sm-offset-2">
+                    <div class="col-sm-2 ">
                         <button id="ctlBtn" class="btn btn-primary col-sm-offset-1" type="button">开始上传</button>
                     </div>
                 </div>
